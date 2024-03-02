@@ -20,7 +20,7 @@ public class DestinoServiceImpl implements DestinoService{
     //La anotacion autowired crea un unico objeto mientras se ejecuta la app
     @Autowired
     private DestinoDao destinoDao;
-    
+    //ejemplo
     @Override
     public List<Destino> getDestinos(){
         var lista = destinoDao.findAll();
