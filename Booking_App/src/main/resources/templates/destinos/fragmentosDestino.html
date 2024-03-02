@@ -77,7 +77,7 @@
                               <label for="customRange3" class="form-label">Precio</label>
                               <input type="range" class="form-range" min="0" max="5" step="0.5" id="precioElegido">
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Aplicar filtro</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Aplicar filtros</button>
                           </form>
                         </div>
                       </div>
@@ -96,7 +96,7 @@
                                 <tr th:each="destino, contador : ${destinos}" class="border-box">
                                         <td style="color:white;">[[${contador.count}]]</td>
                                         <td><img th:src="${destino.ruta_imagen}" width="350" height="300"></td>
-                                        <td>
+                                        <td style="border-right: 1px solid #ccc;">
                                             [[${destino.localizacion}]]<br><br>
                                             [[${destino.descripcion_general}]]<br><br>
                                             Descripcion:<br><br>
@@ -104,7 +104,7 @@
                                             <br>Cancelacion Gratis
                                             <br>Mejor precio garantizado
                                         </td>
-                                        <td style="text-align: center;">
+                                        <td style="text-align: center; border-right: 1px black;">
                                             
                                             $[[${destino.precio_noche}]] por noche<br><br>
                                             [[${destino.descuento}]] de descuento<br><br><br><br><br><br>
