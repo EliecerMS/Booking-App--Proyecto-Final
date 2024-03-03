@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <body>
+            <header th:replace="~{layout/plantilla :: header}"></header>
+            <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100">
+                <div class="w-50 mx-auto">
+                    <h1 style="text-align: center;">Inicia sesion con nosotros</h1>
+                    <br>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="username" placeholder="Nombre de usuario">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                            </div>
+                            <a href="destinos" class="btn btn-primary w-100" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30); padding: 10px 20px;">Iniciar Sesión</a>
+                        </form>
+                </div>
+            </div>
+        </body>
+</html>
