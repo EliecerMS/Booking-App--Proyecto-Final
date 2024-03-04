@@ -1,0 +1,61 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <body>
+            <header th:replace="~{layout/plantilla :: header}"></header>
+            <section>
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters vh-100">
+                        <div class="col-6 bg-image d-flex align-items-center justify-content-center"></div>
+                        <div class="col-6 d-flex align-items-center justify-content-center" style="padding: 70px;">
+                            <div class="container">
+                                <h2 style="text-align: center;">Permitenos ser parte de tus sueños de viaje
+                                </h2>
+                                <br>
+                                    <h3 style="text-align: center;">Inicia una cuenta con nosotros</h3>
+                                    <form>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Nombre">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="email" class="form-control" placeholder="Apellidos">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="email" class="form-control" placeholder="Correo electrónico">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="password" class="form-control" placeholder="Contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Nombre de usuario">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Registrate</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer th:replace="~{layout/plantilla :: footer}"></footer>
+        </body>
+</html>
