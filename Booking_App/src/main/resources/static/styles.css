@@ -97,3 +97,14 @@ tbody tr{
   padding: 1rem;
 }
 
+.btn-primary{
+    background-color: #e07c1e;
+}
+
+.nav .nav-link{
+    color: black;
+}
+
+.bg-footer{
+    background-color: #D89041 !important;
+}

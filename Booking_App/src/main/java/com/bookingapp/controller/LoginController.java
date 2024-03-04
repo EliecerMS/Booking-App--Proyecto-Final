@@ -4,7 +4,8 @@
  */
 package com.bookingapp.controller;
 
-import com.bookingapp.service.DestinoService;
+
+import com.bookingapp.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,18 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @Slf4j // como se comunica con la base de datos
-@RequestMapping("destinos")
-public class DestinoController {
-    @Autowired
-    private DestinoService destinoService;
+@RequestMapping("login")
+public class LoginController {
+        @Autowired
+    private LoginService loginService;
     
-    @GetMapping("")
+    @GetMapping("") // al dejarlo vacio la ruta funciona asi: /login
     public String inicio(Model model){
-        var destinos = destinoService.getDestinos();
-        model.addAttribute("destinos",destinos);
-        model.addAttribute("totalDestinos", destinos.size());
-        return "destinos/listado";
+        //var logins = loginService.getLogin();
+        //model.addAttribute("logins",logins);
+        //model.addAttribute("totalLogins", logins.size());
+        return "login/login";
     }
-    
-    
 }
