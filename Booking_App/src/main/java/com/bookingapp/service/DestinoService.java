@@ -13,4 +13,9 @@ import java.util.List;
  */
 public interface DestinoService {
     public List<Destino> getDestinos();
+    
+    
+     // Se obtiene un Categoria, a partir del id de un categoria
+    public Destino getDestino(Destino destino);
+    
 }

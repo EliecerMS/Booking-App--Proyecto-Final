@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @Slf4j // como se comunica con la base de datos
-@RequestMapping("login")
+@RequestMapping("/login")
 public class LoginController {
         @Autowired
     private LoginService loginService;
     
-    @GetMapping("/login")
+     @GetMapping("/iniciarSesion")
     public String inicio(Model model){
         //var logins = loginService.getLogin();
         //model.addAttribute("logins",logins);
         //model.addAttribute("totalLogins", logins.size());
-        return "login/login";
+        return "/login/iniciarSesion";
     }
 }

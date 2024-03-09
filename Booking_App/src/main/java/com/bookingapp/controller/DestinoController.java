@@ -4,6 +4,7 @@
  */
 package com.bookingapp.controller;
 
+import com.bookingapp.domain.Destino;
 import com.bookingapp.service.DestinoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @Slf4j // como se comunica con la base de datos
-@RequestMapping("destinos")
+@RequestMapping("/destinos")
 public class DestinoController {
     @Autowired
     private DestinoService destinoService;
@@ -28,6 +29,15 @@ public class DestinoController {
         var destinos = destinoService.getDestinos();
         model.addAttribute("destinos",destinos);
         model.addAttribute("totalDestinos", destinos.size());
-        return "destinos/listado";
+        return "/destinos/listado";
+    }
+    
+    
+    
+    @GetMapping("detallesDestino/{idDestino}")
+    public String verDetallesDestino(Destino destino, Model model){
+        destino = destinoService.getDestino(destino);
+        model.addAttribute("destino", destino);
+        return "/destinos/detallesDestino";
     }
 }
