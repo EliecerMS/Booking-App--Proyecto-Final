@@ -33,4 +33,10 @@ public class DestinoServiceImpl implements DestinoService{
     public Destino getDestino(Destino destino) {
         return destinoDao.findById(destino.getIdDestino()).orElse(null);
     }
+    
+    @Override
+    @Transactional(readOnly=true)    
+    public List<Destino> filtrarPrecioNoche(double precioSup) {
+        return destinoDao.filtrarPrecioNoche(precioSup);
+    }
 }

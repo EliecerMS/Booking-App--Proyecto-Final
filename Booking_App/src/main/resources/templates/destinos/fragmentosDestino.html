@@ -11,31 +11,65 @@
         <section th:fragment="listadoDestinos" id="destinos">
             <div class="container-fluid" style="padding-left: 50px; padding-right: 50px; margin-top: 100px;">
                 <div class="row">
-                     <!-- columna derecha -->
+                     <!-- columna derecha donde esta el card para los filtros-->
+                     
                   <div class="col-md-3 fixed-column">
                     <div class="card filter-card sticky-top">
                         <div class="card-header" style="background-color: rgb(224, 124, 30);">
                           <h5 class="card-title" style="color: white; text-align: center;">Filtros</h5>
                         </div>
                         <div class="card-body" style="border: 1px solid #ccc;">
-                          <form>
+                          <form method="POST" th:action="@{/destinos/queryPrecio}" class="was-validated">
                             <div class="mb-3">
-                              <label for="date" class="form-label">Por fecha</label>
+                              <!--<label for="date" class="form-label">Por fecha</label>
                               <br>
                               Inicio
                               <input type="date" class="form-control" id="dateInicio">
                               <br>
                               Final
                               <input type="date" class="form-control" id="dateFinal">
-                              <br>
-                              <label for="customRange3" class="form-label">Precio</label>
-                              <input type="range" class="form-range" min="0" max="5" step="0.5" id="precioElegido">
+                              <br>-->
+                              <label for="precioSup">Precio</label>
+                              <input type="range" class="form-range" min="25" max="500" step="5" oninput="updateValue(this.value)"/>
+                              <!--<label>0$-</label><output id="rangeValue" th:value="${precioSup}" th:name="precioSup">0.0</output><label>$</label>-->
+                              <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" required="true"/>
                             </div>
                             <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Aplicar filtros</button>
                           </form>
                         </div>
                       </div>
                   </div>
+                      <!-- 3 Sección para crear los filtros 
+                        <section th:fragment="filtrosDestinos" class="bg-light">
+                            <div class="row py-2">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <form method="POST" th:action="@{/pruebas/query1}" 
+                                          class="was-validated">
+                                        <div class="card">                            
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="precioInf">[[#{pruebas.precio.inferior}]]</label>
+                                                    <input type="number" class="form-control" 
+                                                           th:value="${precioInf}"
+                                                           th:name="precioInf" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
+                                                    <input type="number" class="form-control" 
+                                                           th:value="${precioSup}"
+                                                           th:name="precioSup" required="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-check"></i> [[#{pruebas.ampliadas}]]
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> 
+                        </section>-->
                     <!-- columna izquierda --> 
                     <div class="col-md-9 scrollable-column">
                         <div class="scrollable-content" style="overflow-y: auto;">
@@ -154,6 +188,7 @@
             </div>
         </section>
         
+       
         
     </body>
 </html>

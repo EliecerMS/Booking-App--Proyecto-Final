@@ -7,6 +7,7 @@ package com.bookingapp.service;
 import com.bookingapp.domain.Destino;
 import java.util.List;
 
+
 /**
  *
  * @author eliec
@@ -18,4 +19,6 @@ public interface DestinoService {
      // Se obtiene un Categoria, a partir del id de un categoria
     public Destino getDestino(Destino destino);
     
+    // Filtrar por precio noche
+    public List<Destino> filtrarPrecioNoche(double precioSup);
 }
