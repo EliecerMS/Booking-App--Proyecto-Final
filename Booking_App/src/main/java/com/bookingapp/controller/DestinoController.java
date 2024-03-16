@@ -52,4 +52,14 @@ public class DestinoController {
         model.addAttribute("precioSup", precioSup);
         return "/destinos/listado";
     }
+    
+     @PostMapping("/queryLocacion")
+    public String consultaLocacion(@RequestParam(value = "locacion") String locacion, Model model) {
+        var destinos = destinoService.filtrarLocacion(locacion);
+        model.addAttribute("destinos", destinos);
+        model.addAttribute("totalDestinos", destinos.size());
+        
+        model.addAttribute("locacion", locacion);
+        return "/destinos/listado";
+    }
 }

@@ -27,6 +27,8 @@ public class Destino implements Serializable{
     private long idDestino;
     private String nombre_destino;
     private String localizacion;
+    private String pais;
+    private String ciudad;
     private String ruta_imagen;
     private String descripcion_general;
     private String descripcion_media;
@@ -45,10 +47,12 @@ public class Destino implements Serializable{
     public Destino() {
     }
 
-    public Destino(long idDestino, String nombre_destino, String localizacion, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres) {
+    public Destino(long idDestino, String nombre_destino, String localizacion, String pais, String ciudad, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres) {
         this.idDestino = idDestino;
         this.nombre_destino = nombre_destino;
         this.localizacion = localizacion;
+        this.pais = pais;
+        this.ciudad = ciudad;
         this.ruta_imagen = ruta_imagen;
         this.descripcion_general = descripcion_general;
         this.descripcion_media = descripcion_media;
@@ -63,6 +67,8 @@ public class Destino implements Serializable{
         this.exclusion_dos = exclusion_dos;
         this.exclusion_tres = exclusion_tres;
     }
+
+    
 
     
 

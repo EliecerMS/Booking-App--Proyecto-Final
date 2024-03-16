@@ -21,4 +21,7 @@ public interface DestinoService {
     
     // Filtrar por precio noche
     public List<Destino> filtrarPrecioNoche(double precioSup);
+    
+    // Filtrar por locacion
+    public List<Destino> filtrarLocacion(String locacion);
 }
