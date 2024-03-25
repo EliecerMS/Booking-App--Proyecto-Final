@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  *
  * @author eliec
+ * @author Alonso
  */
 @Controller
 @Slf4j // como se comunica con la base de datos
@@ -26,14 +27,22 @@ public class DestinoController {
     @Autowired
     private DestinoService destinoService;
     
-    @GetMapping("/listado")
+    
+    
+    /*======================================================
+    * RUTA: LISTADO
+    * dejamos el mapping vacio, pero internamente
+    * sabemos que en esta ruta hace referencia a listado
+    ======================================================*/
+    @GetMapping("")
     public String inicio(Model model){
         var destinos = destinoService.getDestinos();
         model.addAttribute("destinos",destinos);
         model.addAttribute("totalDestinos", destinos.size());
+        model.addAttribute("title", "Destinos");
         return "/destinos/listado";
     }
-    
+    /*======================================================*/
     
     
     @GetMapping("detallesDestino/{idDestino}")
@@ -53,7 +62,7 @@ public class DestinoController {
         return "/destinos/listado";
     }
     
-     @PostMapping("/queryLocacion")
+    @PostMapping("/queryLocacion")
     public String consultaLocacion(@RequestParam(value = "locacion") String locacion, Model model) {
         var destinos = destinoService.filtrarLocacion(locacion);
         model.addAttribute("destinos", destinos);

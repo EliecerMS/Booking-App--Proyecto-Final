@@ -23,12 +23,19 @@ public class RegistroController {
 
     @Autowired
     private RegistroService registroService;
-    
-    @GetMapping("/registro")
-    public String inicio(Model model){
-       // var registros = registroService.getRegistro();
-       // model.addAttribute("registros",registros);
+
+
+    /*======================================================
+    * RUTA: default a formulario de registro
+    * dejamos el mapping vacio, pero internamente
+    * sabemos que en esta ruta hace referencia a la pagina de formulario
+    ======================================================*/
+    @GetMapping("")
+    public String inicio(Model model) {
+        // var registros = registroService.getRegistro();
+        // model.addAttribute("registros",registros);
         //model.addAttribute("totalRegistros", registros.size());
+        model.addAttribute("title", "Regístrate");
         return "registro/registro";
     }
 }

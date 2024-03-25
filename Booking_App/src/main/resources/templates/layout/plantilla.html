@@ -1,59 +1,161 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:fragment="head">
-        <title>Bookign App</title>
+        <title th:text="${title} ? 'Booking App - ' + ${title} : 'Booking App'"></title>
         <meta charset="UTF-8"/>
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+            <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
     </head>
     <body>
         <header th:fragment="header" class="header">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding: 15px;">
-                <a class="navbar-brand" th:href="@{/destinos/listado}">Booking App</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
-                        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor03">
+            <!-- comment 
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top menu-principal" style="padding: 15px;">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/}">Booking App</a>
+                    <button class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarColor03"
+                            aria-controls="navbarColor03"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarColor03">
 
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/destinos/listado}">Sobre nosotros <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/destinos/listado}">Destinos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/registro/registro}">Registrate</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="background-color: rgb(224, 124, 30); color: white;" th:href="@{/login/iniciarSesion}">Iniciar Sesión</a>
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link btn-top" th:href="@{/destinos}">Destinos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-top" th:href="@{/registro/registro}">Regístrate</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-login" th:href="@{/login/iniciarSesion}">Iniciar Sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>-->
+            <nav class="navbar navbar-expand-lg fixed-top navbar-ligth bg-ligth menu-principal" aria-label="Main navigation">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/}">Booking App</a>
+                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link btn-top" th:href="@{/destinos}">Destinos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-top" th:href="@{/registro}">Regístrate</a>
+                            </li>
+                            <li class="nav-item dropdown d-none">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" th:href="@{/login}"><button class="btn btn-login" type="submit">Iniciar Sesión</button></a>
+                            </li>
+                        </ul>
+                        <form class="d-flex mb-0 d-none" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
             </nav>
         </header>
 
 
-        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
-            <div class="container"> 
-                <div class ="col">
-                    <p class="lead text-center">
-                        &COPY;  2024 Booking App
-                    </p>
+        <div class="container-fluid footer" th:fragment="footer">
+            <footer class="py-5 container">
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <h5>Section</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/}" class="nav-link p-0 text-body-secondary">Inicio</a></li>
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/destinos}" class="nav-link p-0 text-body-secondary">Destinos</a></li>
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/registro}" class="nav-link p-0 text-body-secondary">Regístrate</a></li>
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/login}" class="nav-link p-0 text-body-secondary">Sesión</a></li>
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/faqs}" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-3">
+                        <form id="form-suscribe">
+                            <h5>Suscríbete</h5>
+                            <p>Recibe en tu correo las mejores recomendaciones para visitar.</p>
+                            <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                                <label for="newsletter1" class="visually-hidden">Correo electrónico</label>
+                                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                                <button class="btn btn-primary" type="button">Suscribirme</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
-            <script>
-                function updateValue(value) {
-                    document.getElementById("rangeValue").value = value;
-                }
-            </script>
-        </footer>
+
+                <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                    <p>© 2024 Booking App, Inc. Derechos Reservados.</p>
+                    <ul class="list-unstyled d-flex">
+                        <li class="ms-3">
+                            <a class="link-body-emphasis" href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a class="link-body-emphasis" href="#">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a class="link-body-emphasis" href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a class="link-body-emphasis" href="#">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+                <script src="https://unpkg.com/@popperjs/core@2"></script>
+                <script>
+                    // jQuery, pagina cargada y lista
+                    $(document).ready(function () {
+                        $('#price_range_slider').on('input', function () {
+                            $('#rangeValue').val($(this).val());
+                        });
+
+                        (() => {
+                            'use strict';
+
+                            document.querySelector('#navbarSideCollapse').addEventListener('click', () => {
+                                document.querySelector('.offcanvas-collapse').classList.toggle('open')
+                            })
+                        })()
+
+                    });
+
+                    //function updateValue(value) {
+                    //    document.getElementById("rangeValue").value = value;
+                    //}
+                </script>
+            </footer>
+        </div>
 
     </body>
 </html>

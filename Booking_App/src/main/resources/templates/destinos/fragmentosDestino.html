@@ -6,160 +6,200 @@
         <title>Destinos</title>
     </head>
     <body>
-        
+
         <!-- se muestra la lista de destinos -->
-        <section th:fragment="listadoDestinos" id="destinos">
-            <div class="container-fluid" style="padding-left: 50px; padding-right: 50px; margin-top: 100px;">
+        <section th:fragment="listadoDestinos" id="destinos" class="seccion-destinos seccion-productos">
+            <div class="container">
                 <div class="row">
-                     <!-- columna derecha donde esta el card para los filtros-->
-                     
-                  <div class="col-md-3 fixed-column">
-                    <div class="card filter-card sticky-top">
-                        <div class="card-header" style="background-color: rgb(224, 124, 30);">
-                          <h5 class="card-title" style="color: white; text-align: center;">Filtros</h5>
-                        </div>
-                        <div class="card-body" style="border: 1px solid #ccc;">
-                          <form method="POST" th:action="@{/destinos/queryPrecio}" class="was-validated">
-                            <div class="mb-3">
-                              <!--<label for="date" class="form-label">Por fecha</label>
-                              <br>
-                              Inicio
-                              <input type="date" class="form-control" id="dateInicio">
-                              <br>
-                              Final
-                              <input type="date" class="form-control" id="dateFinal">
-                              <br>-->
-                              <label for="precioSup">Precio</label>
-                              <input type="range" class="form-range" min="25" max="500" step="5" oninput="updateValue(this.value)"/>
-                              <!--<label>0$-</label><output id="rangeValue" th:value="${precioSup}" th:name="precioSup">0.0</output><label>$</label>-->
-                              <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" required="true"/>
+                    <!-- columna izquierda donde esta el card para los filtros-->
+
+                    <div class="col-12">
+                        <h1>Descubre nuevos destinos que visitar</h1>
+                    </div>
+
+                    <div class="col-12">
+                        <form class="" id="form-buscar-destinos" action="" method="post">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <i class="fa-solid fa-bed"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="¿Adonde quieres ir?">
+                                    <button class="btn btn-orange" type="button">
+                                        <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                                    </button>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Aplicar filtros</button>
-                          </form>
-                        </div>
-                      </div>
-                  </div>
-                    <!-- columna izquierda --> 
+                        </form>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="card p-3">
+                            <h5 class="text-center pt-3">Fechas</h5>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col text-center">
+                                    <label for="startDate">Desde:</label>
+                                    <input class="inputDate" type="date" id="startDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                </div>
+                                <div class="col text-center">
+                                    <label for="endDate">Hasta:</label>
+                                    <input class="inputDate" type="date" id="endDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <h5 class="text-center pt-3">Personas</h5>
+                            </div>
+                            <hr>
+                                <div>
+                                    <form method="POST" th:action="@{/destinos/queryPrecio}">
+                                        <div class="mb-3">
+                                            <h5 class="text-center pt-3">Precio</h5>
+                                            <input type="range" class="form-range" min="25" max="500" step="5" id="price_range_slider"/>
+                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup"/>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            <hr>
+                                <div>
+                                    <h5 class="text-center pt-3">Calificación</h5>
+                                </div>
+                                </div>
+
+                    </div>
+
+
+
+                    <!-- columna derecha --> 
                     <div class="col-md-9 scrollable-column">
                         <div class="scrollable-content" style="overflow-y: auto;">
-                            <form method="POST" th:action="@{/destinos/queryLocacion}" class="was-validated">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Buscar por locación" aria-label="Buscar por locación" aria-describedby="button-addon2" th:value="${locacion}"
-                                                           th:name="locacion" required="true"/>
-                                    <button type="submit" class="btn btn-outline-secondary">Buscar</button>
-                                </div>
-                            </form>
-                            <!-- la tabla que muestra los destinos -->
-                            <div th:if="${destinos != null and !destinos.empty}">
-                                <table class="table">
-                                    <tbody>
-                                        <tr th:each="destino, contador : ${destinos}" class="border-box">
-                                                <td style="color:white;">[[${contador.count}]]</td>
-                                                <td><img th:src="${destino.ruta_imagen}" width="350" height="300"></td>
-                                                <td style="border-right: 1px solid #ccc;">
-                                                    [[${destino.localizacion}]]<br><br>
-                                                    <b>[[${destino.nombre_destino}]]</b><br><br>
-                                                    <p style="font-family: 'Roboto', sans-serif; font-size: 13px;">[[${destino.descripcion_general}]]</p><br>
-                                                    Descripcion:<br><br>
-                                                    <p style="font-family: 'Roboto', sans-serif; font-size: 13px;">[[${destino.descripcion_media}]]</p>
-                                                    <br>Cancelacion Gratis
-                                                    <br>Mejor precio garantizado
-                                                </td>
-                                                <td style="text-align: center; border-right: 1px black;">
 
-                                                    $[[${destino.precio_noche}]] por noche<br><br>
-                                                    [[${destino.descuento}]] de descuento<br><br><br><br><br><br>
-                                                                            <a class="nav-link" style="background-color: rgb(224, 124, 30); color: white; padding: 15px;" th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">Ver detalles</a>
-                                                </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="row m-1 mt-0 mb-3 card-producto" th:each="destino, contador : ${destinos}">
+                                <div class="col-3 pt-0 mt-1">
+                                    <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                        <img th:src="${destino.ruta_imagen}" height="220px" class="card-img-top" alt="...">
+                                    </a>
+                                </div>
+                                <div class="col-5 pt-0 mt-1">
+                                    <i class="fa-solid fa-location-dot text-secondary"></i>
+                                    <span class="text-secondary" th:text="${destino.localizacion}"></span>
+                                    <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                        <h5 class="" th:text="${destino.nombre_destino}"></h5>
+                                    </a>
+                                    <p class="card-text text-muted" th:text="${destino.descripcion_general}"></p>
+
+                                </div>
+                                <div class="col-4 pt-0 mt-1 text-center d-flex align-items-end row linea-vertical ps-5">
+                                    <div class="">
+                                        <p>Precio desde
+                                            <br>
+                                            <strong>$[[${destino.precio_noche}]]</strong>
+                                            <br>
+                                            por noche
+                                        </p>
+                                    </div>
+                                    <div class="text-secondary">
+                                        <strong>[[${destino.descuento}]]</strong> de descuento
+                                    </div>
+                                    <div class="">
+                                        <a class="nav-link" th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">Ver detalles</a>
+                                    </div>
+                                </div>
                             </div>
+
                             <!-- si no hay destinos -->
                             <div class="text-center p-2" th:if="${destinos == null or destinos.empty}">
-                                        <span>No hay destinos que mostrar</span>
+                                <span>No hay destinos que mostrar</span>
                             </div>
-                      </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        
-        
+
+
+
         <!-- se muestra los detalles del destino -->
-        <section th:fragment="detallesDestino" id="destinos">
-            <div class="container-fluid" style="padding-left: 50px; padding-right: 50px; margin-top: 100px;">
+        <section th:fragment="detallesDestino" id="detallesDestinos">
+            <div class="container">
                 <div class="row">
                     <!-- columna izquierda, muestra detalles del destino --> 
                     <div class="col-md-9 scrollable-column">
-                         <h1>[[${destino.nombre_destino}]]</h1>
-                         <p><b>[[${destino.localizacion}]]</b></p>
+                        <h1>[[${destino.nombre_destino}]]</h1>
+                        <p class="text-secondary">
+                            <i class="fa-solid fa-location-dot text-secondary"></i>
+                            [[${destino.localizacion}]]
+                        </p>
                         <div class="scrollable-content" style="overflow-y: auto;">
                             <!-- carrousel --> 
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                               <ol class="carousel-indicators">
-                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                               </ol>
-                               <div class="carousel-inner">
-                                 <div class="carousel-item active">
-                                     <img  class="d-block w-100" th:src="${destino.ruta_imagen}" alt="First slide">
-                                 </div>
-                                 <div class="carousel-item">
-                                   <img  class="d-block w-100" th:src="${destino.ruta_imagen}" alt="Second slide">
-                                 </div>
-                               </div>
-                               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                 <span class="sr-only">Previous</span>
-                               </a>
-                               <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                 <span class="sr-only">Next</span>
-                               </a>
-                             </div>
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img  class="d-block w-100" th:src="${destino.ruta_imagen}" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img  class="d-block w-100" th:src="${destino.ruta_imagen}" alt="Second slide">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                             <br/>
-                            <article><h2>Descripcion</h2><p>[[${destino.descripcion_detalles}]]</p></article>
+                            <article>
+                                <h2>Descripción</h2>
+                                <p>[[${destino.descripcion_detalles}]]</p>
+                            </article>
                             <br/>
-                            <article><h2>Destacado de este destino</h2><p>[[${destino.destacado}]]</p></article>
+                            <article>
+                                <h2>Destacado de este destino</h2>
+                                <p>[[${destino.destacado}]]</p>
+                            </article>
                             <br/>
-                            <article><h2>Incluidos:</h2><p>[[${destino.inclusion_uno}]]<br/>[[${destino.inclusion_dos}]]<br/>[[${destino.inclusion_tres}]]</p></article>
+                            <article>
+                                <h2>Incluidos:</h2>
+                                <p>[[${destino.inclusion_uno}]]
+                                    <br/>[[${destino.inclusion_dos}]]
+                                    <br/>[[${destino.inclusion_tres}]]
+                                </p>
+                            </article>
 
                         </div>
                     </div>
-                    
-                  <!-- columna derecha, se muestra las opciones para la reserva -->
-                  <div class="col-md-3 fixed-column">
-                    <div class="card filter-card sticky-top">
-                        <div class="card-header" style="background-color: rgb(224, 124, 30);">
-                          <h5 class="card-title" style="color: white; text-align: center;">Opciones para la reserva</h5>
-                        </div>
-                        <div class="card-body" style="border: 1px solid #ccc;">
-                          <form>
-                            <div class="mb-3">
-                              <br>
-                              Opcion 1
-                              <input type="date" class="form-control" id="dateInicio">
-                              <br>
-                              Opcion 2 
-                              <input type="date" class="form-control" id="dateFinal">
-                              <br>
-                              <label for="customRange3" class="form-label">Opcion 3</label>
-                              <input type="range" class="form-range" min="0" max="5" step="0.5" id="precioElegido">
+
+                    <div class="col-3">
+                        <div class="card p-3">
+                            <h5 class="text-center pt-3">Fechas</h5>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col text-center">
+                                    <label for="startDate">Desde:</label>
+                                    <input class="inputDate" type="date" id="startDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                </div>
+                                <div class="col text-center">
+                                    <label for="endDate">Hasta:</label>
+                                    <input class="inputDate" type="date" id="endDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Reservar</button>
-                          </form>
+                            <hr>
+                                <div>
+                                    <h5 class="text-center pt-3">Personas</h5>
+                                </div>
                         </div>
-                      </div>
-                  </div>
-                           
+
+                    </div>
+
                 </div>
             </div>
         </section>
-        
-       
         
     </body>
 </html>

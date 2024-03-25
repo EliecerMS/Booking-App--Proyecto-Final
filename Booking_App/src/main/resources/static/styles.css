@@ -1,24 +1,288 @@
+html,
+body {
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+body {
+    margin-top: 100px;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for vh unit */
+    min-height: 100vh; /* You might also want to use
+                          'height' property instead.
+                          
+                          Note that for percentage values of
+                          'height' or 'min-height' properties,
+                          the 'height' of the parent element
+                          should be specified explicitly.
+    
+                          In this case the parent of '.vertical-center'
+                          is the <body> element */
+
+    /* Make it a flex container */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    /* Align the bootstrap's container vertically */
+    -webkit-box-align : center;
+    -webkit-align-items : center;
+    -moz-box-align : center;
+    -ms-flex-align : center;
+    align-items : center;
+
+    /* In legacy web browsers such as Firefox 9
+       we need to specify the width of the flex container */
+    width: 100%;
+
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+       hence the bootstrap's container won't be aligned to the center anymore.
+    
+       Therefore, we should use the following declarations to get it centered again */
+    -webkit-box-pack : center;
+    -moz-box-pack : center;
+    -ms-flex-pack : center;
+    -webkit-justify-content : center;
+    justify-content : center;
+}
+
+.wrapper{
+    padding: 50px 15px;
+    min-height: calc(100vh - 200px);
+}
+
+@media (max-width: 991.98px) {
+    .offcanvas-collapse {
+        position: fixed;
+        top: 100px; /* Height of navbar */
+        bottom: 0;
+        left: 100%;
+        width: 100%;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        overflow-y: auto;
+        visibility: hidden;
+        background-color: #fff;
+        transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+    }
+    .offcanvas-collapse.open {
+        visibility: visible;
+        transform: translateX(-100%);
+    }
+}
+
+.footer{
+    background-color: #fdf7f1;
+}
+
+
+.menu-principal{
+    padding: 0 15px;
+    height: 100px;
+}
+
+.btn-login{
+    border-radius: 10px;
+    background-color: #e07c1e;
+    color: white;
+}
+
+
+/* ====== formularios ====== */
+#form-login .form-control,
+#form-buscar-home .form-control,
+#form-suscribe .form-control{
+    height: 60px;
+    padding: 20px;
+}
+
+#form-buscar-home .form-control{
+    border-radius: 30px;
+    border: none;
+}
+
+#form-buscar-home button{
+    background-color: #e07c1f;
+    border: none;
+    border-radius: 30px;
+    width: 70px;
+    height: 60px;
+}
+
+#form-buscar-home > div{
+    background-color: white;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    border: 20px solid rgba(255, 255, 255, 0.3);
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+}
+
+#form-login .btn.btn-primary,
+#form-suscribe .btn.btn-primary{
+    height: 60px;
+    padding: 20px;
+}
+/* ====== formularios ====== */
+
+
+.seccion-destinos{
+
+}
+
+.card-producto{
+    border: 1px solid #d2d2d2;
+    border-radius: 16px;
+    padding: 12px 4px;
+}
+
+.seccion-destinos h1{
+    color: #545780;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+#form-buscar-destinos{
+    margin: 20px 0 40px 0;
+}
+
+#form-buscar-destinos .form-control{
+    background-color: #F2F4F7;
+    height: 50px;
+    border-left: none;
+    margin-right: 10px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+#form-buscar-destinos .input-group-text{
+    background-color: #f3f4f7;
+    padding: 0 0px 0 20px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+}
+
+#form-buscar-destinos .btn-orange{
+    border-radius: 16px;
+    background-color: #e07c1e;
+    color: white;
+    border: none;
+    padding: 0 20px;
+}
+
+
+.seccion-home{
+    height: 800px;
+    width: 100%;
+    background-image: url("../images/img-header-index.jpg");
+    background-position: top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.seccion-home h1{
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    color: white;
+}
+
+.seccion-home h1:after{
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 4px;
+    top: 78%;
+    left: calc(50% - 100px);
+    background-color: #e07c1f;
+}
+
+.seccion-productos a{
+    font-weight: bold;
+    color: #3D3D3D;
+    text-decoration: none;
+}
+
+.seccion-productos h3{
+    font-weight: bold;
+    color: #e07c1f;
+    margin-bottom: 50px;
+}
+
+.seccion-productos a:hover{
+    color: #e07c1f;
+}
+
+.seccion-productos .text-secondary{
+    font-size: 12px;
+}
+
+.seccion-productos .card{
+    border-radius: 20px;
+}
+
+.seccion-productos img{
+    border-radius: 10px;
+}
+
+.card.noborder{
+    border: none;
+}
+
+.inputDate{
+    padding: 10px 8px;
+    font-size: 14px;
+    background-color: #f3f4f7;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+}
+
+.seccion-destinos .card-producto a.nav-link{
+    border: 1px solid #e07c1e;
+    background-color: white;
+    color: #e07c1e;
+    padding: 15px;
+    border-radius: 16px;
+}
+
+
+.seccion-destinos .card-producto a.nav-link:hover{
+    border: 1px solid #e07c1e;
+    background-color: #e07c1e;
+    color: white;
+    padding: 15px;
+    border-radius: 16px;
+}
+
+.linea-vertical{
+    border-left: 1px solid #dee2e6;
+}
 
 nav{
     background-color: white;
     box-shadow: 0px 4px 4px rgba(219, 219, 219, 0.9);
 }
 
-nav a {
+nav a.btn-top {
     position: relative;
     color: #000;
     text-decoration: none;
-  }
+}
 
-  nav li {
+nav li {
     padding-left: 25px;
-  }
-  
-  nav a:hover {
-    color: #000;
-  }
+}
 
-  nav a::before {
+nav a.btn-top:hover {
+    color: #000;
+}
+
+nav a.btn-top::before {
     content: "";
     position: absolute;
     display: block;
@@ -29,12 +293,12 @@ nav a {
     background-color: #ec832e;
     transform: scaleX(0);
     transition: transform 0.3s ease;
-  }
-  
-  
-  nav a:hover::before {
+}
+
+
+nav a.btn-top:hover::before {
     transform: scaleX(1);
-  }
+}
 
 
 
@@ -42,60 +306,60 @@ nav a {
 
 
 .vh-100 {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 .d-flex {
-  display: flex;
+    display: flex;
 }
 
 .align-items-center {
-  align-items: center;
+    align-items: center;
 }
 
 .justify-content-center {
-  justify-content: center;
+    justify-content: center;
 }
 
 .bg-image {
-  background-image: url('https://thumbs.dreamstime.com/b/beautiful-view-sea-sunset-aesthetic-seascape-beautiful-view-sea-sunset-aesthetic-seascape-266120123.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+    background-image: url('https://thumbs.dreamstime.com/b/beautiful-view-sea-sunset-aesthetic-seascape-beautiful-view-sea-sunset-aesthetic-seascape-266120123.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 
 .border-box {
-  border: 1px solid #ccc;
-  padding: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
 }
 
 tbody tr{
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 
 
 .filter-card {
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .filter-card .card-header {
-  background-color: #f8f9fa;
-  border-bottom: none;
-  padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: none;
+    padding: 1rem;
 }
 
 .filter-card .card-header .card-title {
-  font-weight: 500;
-  color: #333;
+    font-weight: 500;
+    color: #333;
 }
 
 .filter-card .card-body {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 
@@ -103,25 +367,213 @@ tbody tr{
 
 
 .fixed-column {
-  position: sticky;
-  top: 0;
-  height: 100%;
-  overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .scrollable-column {
-  overflow-y: auto;
+    overflow-y: auto;
 }
 
 @media (max-width: 800px) {
-  .fixed-column {
-    position: relative;
-    height: auto;
-  }
+    .fixed-column {
+        position: relative;
+        height: auto;
+    }
 }
 
 @media (min-width: 992px) {
-  .fixed-column {
-    height: 100vh;
+    .fixed-column {
+        height: 100vh;
+    }
+}
+
+
+
+
+/*==================================================================
+                   17. Profile css
+==================================================================*/
+/*===== All Profile Style =====*/
+.profile .profile-header .profile-cover-photo {
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+}
+
+.profile .profile-header .profile-author {
+  padding: 32px;
+  padding-top: 0;
+  position: relative;
+  z-index: 9;
+  margin-top: -80px;
+}
+
+.profile .profile-header .profile-author .profile-name .name {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  color: #000;
+}
+
+.profile .profile-header .profile-author .profile-name .email {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000;
+  margin-top: 8px;
+}
+
+.profile .profile-header .profile-author .profile-photo img {
+  width: 160px;
+  border-radius: 50%;
+}
+
+.profile .profile-title {
+  position: relative;
+  background-color: #F2F2F2;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+}
+
+.profile .profile-title .title {
+  line-height: 48px;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.profile .profile-title .profile-link {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #542DED;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.profile .profile-details .single-details-item {
+  padding: 8px 16px 0;
+}
+
+.profile .profile-details .single-details-item .details-title {
+  width: 145px;
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  .profile .profile-details .single-details-item .details-title {
+    width: 100px;
   }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .profile .profile-details .single-details-item .details-title {
+    width: 145px;
+  }
+}
+
+.profile .profile-details .single-details-item .details-title .title {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #4C4C4C;
+}
+
+.profile .profile-details .single-details-item .details-content {
+  margin-top: 8px;
+}
+
+.profile .profile-details .single-details-item .details-content p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #000;
+  font-weight: 400;
+}
+
+.profile .single-card-info {
+  padding: 16px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 16px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.profile .single-card-info .card-icon img {
+  border-radius: 4px;
+}
+
+.profile .single-card-info .card-info {
+  padding-left: 16px;
+}
+
+.profile .single-card-info .card-info .card-name {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #000;
+}
+
+.profile .single-card-info .card-info .card-number {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #4C4C4C;
+  margin-top: 5px;
+}
+
+.profile .single-card-info .card-info .card-number span {
+  margin-left: 8px;
+}
+
+/*===== All Profile Dark Style =====*/
+.profile-dark {
+  background-color: #161359;
+}
+
+.profile-dark .profile .profile-header .profile-author .profile-name .name {
+  color: #fff;
+}
+
+.profile-dark .profile .profile-header .profile-author .profile-name .email {
+  color: #fff;
+}
+
+.profile-dark .profile .profile-title {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.profile-dark .profile .profile-title .title {
+  color: #fff;
+}
+
+.profile-dark .profile .profile-title .profile-link {
+  color: #E14C7B;
+}
+
+.profile-dark .profile .profile-details .single-details-item .details-title .title {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.profile-dark .profile .profile-details .single-details-item .details-content p {
+  color: #fff;
+}
+
+.profile-dark .profile .single-card-info {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.profile-dark .profile .single-card-info .card-info .card-name {
+  color: #fff;
+}
+
+.profile-dark .profile .single-card-info .card-info .card-number {
+  color: rgba(255, 255, 255, 0.74);
 }

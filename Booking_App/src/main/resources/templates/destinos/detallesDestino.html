@@ -4,7 +4,9 @@
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"></header>
-        <section th:replace="~{destinos/fragmentosDestino :: detallesDestino}"/>
+        <div class="wrapper">
+            <section th:replace="~{destinos/fragmentosDestino :: detallesDestino}"/>
+        </div>
         <footer th:replace="~{layout/plantilla :: footer}"></footer>
     </body>
 </html>

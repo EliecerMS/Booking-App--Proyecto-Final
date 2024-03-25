@@ -24,11 +24,18 @@ public class LoginController {
         @Autowired
     private LoginService loginService;
     
-     @GetMapping("/iniciarSesion")
+        
+    /*======================================================
+    * RUTA: default a iniciar sesion
+    * dejamos el mapping vacio, pero internamente
+    * sabemos que en esta ruta hace referencia a iniciar sesion
+    ======================================================*/
+    @GetMapping("")
     public String inicio(Model model){
         //var logins = loginService.getLogin();
         //model.addAttribute("logins",logins);
         //model.addAttribute("totalLogins", logins.size());
+        model.addAttribute("title", "Login");
         return "/login/iniciarSesion";
     }
 }

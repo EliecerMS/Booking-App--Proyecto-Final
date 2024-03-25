@@ -1,14 +1,20 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}">
-        <body>
-            <header th:replace="~{layout/plantilla :: header}"></header>
-            <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100">
-                <div class="w-50 mx-auto">
-                    <h1 style="text-align: center;">Inicia sesion con nosotros</h1>
-                    <br>
-                        <form>
+    
+    
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <div class="wrapper">
+            <div id="form-login" class="p-0 d-flex align-self-center justify-content-center ">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 style="text-align: center;">Estamos listos para ofrecerte las mejores opciones</h1>
+                        <h3 style="text-align: center;">para reservar y disfrutar del viaje que planeas</h1>
+                    </div>
+                    <div class="col-md-6 col-10 mx-auto">
+                        <form method="POST">
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="username" placeholder="Nombre de usuario">
                             </div>
@@ -17,7 +23,10 @@
                             </div>
                             <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Inciar Sesión</button>
                         </form>
+                    </div>
                 </div>
             </div>
-        </body>
+        </div>
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
 </html>

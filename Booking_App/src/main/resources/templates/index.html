@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <div class="wrapper p-0">
+            
+            <div class="container-fluid seccion-home mb-5">
+                <div class="container">
+                    <div class="row p-0 d-flex align-self-center justify-content-center ">
+                        <div class="col-7">
+                            <div class="vertical-center">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form id="form-buscar-home">
+                                            <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                                                <label for="buscar-home" class="visually-hidden">Email address</label>
+                                                <input id="buscar-home" type="text" class="form-control" placeholder="Buscar nuevos destinos…">
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                    </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <h1>Descubre nuevos destinos que visitar</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container py-5 seccion-productos" th:if="${destinos != null and !destinos.empty}">
+                <h3>Encuentra lugares populares</h3>
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <div class="col" th:each="destino, contador : ${destinos}">
+                        <div class="card noborder">
+                            <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                <img th:src="${destino.ruta_imagen}" height="240px" class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <i class="fa-solid fa-location-dot text-secondary"></i>
+                                <span class="text-secondary" th:text="${destino.localizacion}"></span>
+                                <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                    <h5 class="card-title" th:text="${destino.nombre_destino}"></h5>
+                                </a>
+                                <p class="card-text text-muted" th:text="${destino.descripcion_general}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container py-5 seccion-productos" th:if="${destinos != null and !destinos.empty}">
+                <h3>Destinos en tendencia</h3>
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <div class="col" th:each="destino, contador : ${destinos}">
+                        <div class="card noborder">
+                            <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                <img th:src="${destino.ruta_imagen}" height="240px" class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <i class="fa-solid fa-location-dot text-secondary"></i>
+                                <span class="text-secondary" th:text="${destino.localizacion}"></span>
+                                <a th:href="@{/destinos/detallesDestino/}+${destino.idDestino}">
+                                    <h5 class="card-title" th:text="${destino.nombre_destino}"></h5>
+                                </a>
+                                <p class="card-text text-muted" th:text="${destino.descripcion_general}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>
