@@ -7,6 +7,7 @@ package com.bookingapp.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -42,12 +43,22 @@ public class Destino implements Serializable{
     private String exclusion_uno;
     private String exclusion_dos;
     private String exclusion_tres;
+    //
+    private String condiciones_reembolso;
+    private String habitaciones;
+    private String cantidad_huespedes;
+    private String camas;
+    private String bannos;
     
 
+    @OneToMany
+    @JoinColumn(name = "id_destino", updatable = false)
+    List<Reserva> reservas;
+    
     public Destino() {
     }
 
-    public Destino(long idDestino, String nombre_destino, String localizacion, String pais, String ciudad, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres) {
+    public Destino(long idDestino, String nombre_destino, String localizacion, String pais, String ciudad, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres, String condiciones_reembolso, String habitaciones, String cantidad_huespedes, String camas, String bannos) {
         this.idDestino = idDestino;
         this.nombre_destino = nombre_destino;
         this.localizacion = localizacion;
@@ -66,7 +77,14 @@ public class Destino implements Serializable{
         this.exclusion_uno = exclusion_uno;
         this.exclusion_dos = exclusion_dos;
         this.exclusion_tres = exclusion_tres;
+        this.condiciones_reembolso = condiciones_reembolso;
+        this.habitaciones = habitaciones;
+        this.cantidad_huespedes = cantidad_huespedes;
+        this.camas = camas;
+        this.bannos = bannos;
     }
+
+    
 
     
 

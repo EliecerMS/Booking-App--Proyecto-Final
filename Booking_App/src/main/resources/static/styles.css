@@ -651,3 +651,12 @@ tbody tr{
     #seleccionar-foto {
         display: none;
     }
+    
+    .btn-submit{
+    border: none;
+    background-color: #e07c1e;
+    color: white;
+    padding: 15px;
+    border-radius: 16px;
+    }
+    
