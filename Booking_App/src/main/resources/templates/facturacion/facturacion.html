@@ -1,0 +1,59 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{perfil/fragmentosPerfil :: header}"></header>
+        <div style="background-color:#e4e9e9;">
+            <div style="text-align: left; margin-left: 80px;"></Br>
+                <div style="display: inline-block; background-color: white; border-radius: 5px;">
+                    <a href="perfil"><h6 style="display: inline-block; margin: 0; color: grey">Mi Perfil /</h6></a>
+                    <h6 style="display: inline-block; margin: 0; color: #e07c1e"> Facturación</h6>
+                </div></Br></Br></Br>
+
+                <h3>
+                    Información de tarjeta
+                </h3>
+                <h6>
+                    Puedes editar información de tu tarjeta
+                </h6>            
+            </div></br>
+            <div class="panel" style="max-width: 1360px;">
+                <div style="display: flex; align-items: center;">
+                    <section style=" display: inline-block;">
+                        <div class="espaciado">
+
+                            <h6 style="color: grey; text-align: left; margin-left: 30px">Nombre en la tarjeta</h6>
+                            <div style="text-align: left; margin-left: 30px">
+                                <input class="input-style" type="text" name="NombreTarjeta" />
+                            </div><br/>
+                            <h6 style="color: grey; text-align: left; margin-left: 30px">Número de la tarjeta</h6>
+                            <div style="text-align: left; margin-left: 30px">
+                                <input class="input-style" type="number" name="NumeroTarjeta" />
+                            </div><br/>
+                            <div style="text-align: left; margin-left: 30px;">
+                                <div>
+                                    <h6 style=" display: inline-block; margin: 0; color: grey;">Fecha de vencimiento:</h6>
+                                    <h6 style="display: inline-block; margin: 0; color: grey; margin-left: 40px">CVC</h6>
+                                </div>
+                                <input style="display: inline-block; margin: 0;width: 200px" class="input-style" type="date" name="FechaVencimiento"/>
+                                <input style="display: inline-block; margin: 0; width: 200px;" class="input-style" type="password" name="CVC" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                            </div></br> 
+                    </section>
+                    <section style=" display: inline-block;">
+                        <div style="margin-left: 430px; margin-top: -110px">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/bookingapp-82b5a.appspot.com/o/tarjeta.png?alt=media&token=51a14fa6-7362-40f6-86bd-62d94cc6546d" alt="tarjeta.png" style="text-align:right; width: 400px;">
+                        </div>
+                    </section>
+                </div>
+                <div style="text-align: left; margin-left: 30px; margin-top: -100px">
+                    <input class="btn-login" style="text-align: center; width: 170px; height: 50px; margin: 0 auto; border: none" type="submit" value="Guardar" name="Guardar"</input>
+                </div> </br></br>
+                        </div> </br></br>
+        </div>
+        </div> </br>
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>
