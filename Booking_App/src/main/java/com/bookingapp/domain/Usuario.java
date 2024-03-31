@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(long idUsuario, String nombre, String primer_apellido, String segundo_apellido, String telefono, String email, String password, String username, String rutaImagen, boolean activo, List<Reserva> reservas, List<Rol> roles) {
+    public Usuario(long idUsuario, String nombre, String primer_apellido, String segundo_apellido, String telefono, String email, String password, String username, String rutaImagen, boolean activo, List<Reserva> reservas, List<Rol> roles, String contrasenna, String nombre_usuario) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.primer_apellido = primer_apellido;
@@ -65,5 +65,5 @@ public class Usuario implements Serializable {
         this.reservas = reservas;
         this.roles = roles;
     }
-
+    
 }

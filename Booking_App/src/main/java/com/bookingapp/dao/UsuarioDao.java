@@ -2,7 +2,6 @@ package com.bookingapp.dao;
 
 
 import com.bookingapp.domain.Usuario;
-import com.bookingapp.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

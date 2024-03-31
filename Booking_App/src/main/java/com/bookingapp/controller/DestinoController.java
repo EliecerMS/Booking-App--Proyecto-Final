@@ -34,7 +34,7 @@ public class DestinoController {
     * dejamos el mapping vacio, pero internamente
     * sabemos que en esta ruta hace referencia a listado
     ======================================================*/
-    @GetMapping("")
+    @GetMapping("/listado")
     public String inicio(Model model){
         var destinos = destinoService.getDestinos();
         model.addAttribute("destinos",destinos);
