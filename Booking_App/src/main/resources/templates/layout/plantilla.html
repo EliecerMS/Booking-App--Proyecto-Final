@@ -6,64 +6,49 @@
         <title th:text="${title} ? 'Booking App - ' + ${title} : 'Booking App'"></title>
         <meta charset="UTF-8"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
             <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
     </head>
     <body>
         <header th:fragment="header" class="header">
-            <!-- comment 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top menu-principal" style="padding: 15px;">
-                <div class="container">
-                    <a class="navbar-brand" th:href="@{/}">Booking App</a>
-                    <button class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarColor03"
-                            aria-controls="navbarColor03"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor03">
-
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link btn-top" th:href="@{/destinos}">Destinos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn-top" th:href="@{/registro/registro}">Regístrate</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn-login" th:href="@{/login/iniciarSesion}">Iniciar Sesión</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>-->
             <nav class="navbar navbar-expand-lg fixed-top navbar-ligth bg-ligth menu-principal" aria-label="Main navigation">
                 <div class="container">
                     <a class="navbar-brand" th:href="@{/}">Booking App</a>
                     <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
                     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link btn-top" th:href="@{/destinos}">Destinos</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link btn-top" th:href="@{/reservaciones}">Mis Reservaciones</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="!isAuthenticated()">
                                 <a class="nav-link btn-top" th:href="@{/registro}">Regístrate</a>
                             </li>
-                            <li class="nav-item dropdown d-none">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                    <span class="" sec:authentication="name"></span>
+                                </a>
+                                
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/reservaciones}">Mis Reservaciones</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/facturacion}">Facturación</a></li>
+                                    <li>
+                                        <form method="POST" th:action="@{/logout}">
+                                            <button class="btn btn-dark">
+                                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" sec:authorize="!isAuthenticated()" >
                                 <a class="" th:href="@{/login}"><button class="btn btn-login" type="submit">Iniciar Sesión</button></a>
                             </li>
                         </ul>
@@ -84,7 +69,7 @@
                         <h5>Section</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2 w-25"><a th:href="@{/}" class="nav-link p-0 text-body-secondary">Inicio</a></li>
-                            <li class="nav-item mb-2 w-25"><a th:href="@{/destinos}" class="nav-link p-0 text-body-secondary">Destinos</a></li>
+                            <li class="nav-item mb-2 w-25"><a th:href="@{/destinos/listado}" class="nav-link p-0 text-body-secondary">Destinos</a></li>
                             <li class="nav-item mb-2 w-25"><a th:href="@{/registro}" class="nav-link p-0 text-body-secondary">Regístrate</a></li>
                             <li class="nav-item mb-2 w-25"><a th:href="@{/login}" class="nav-link p-0 text-body-secondary">Sesión</a></li>
                             <li class="nav-item mb-2 w-25"><a th:href="@{/faqs}" class="nav-link p-0 text-body-secondary">FAQs</a></li>
@@ -98,7 +83,7 @@
                             <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                                 <label for="newsletter1" class="visually-hidden">Correo electrónico</label>
                                 <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                                <button class="btn btn-primary" type="button">Suscribirme</button>
+                                    <button class="btn btn-primary" type="button">Suscribirme</button>
                             </div>
                         </form>
                     </div>
@@ -133,6 +118,8 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
                 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
                 <script src="https://unpkg.com/@popperjs/core@2"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
                 <script>
                     // jQuery, pagina cargada y lista
                     $(document).ready(function () {
@@ -147,12 +134,144 @@
                                 document.querySelector('.offcanvas-collapse').classList.toggle('open')
                             })
                         })()
+                        
+                    });
+                    
+                    
+                        
+                        //javaScript para el componente de aumento y decremento de counters de ninnos y adultos
+                    let counterAdult = 0;
+                    let counterNinno = 0;
+                    let sumaTotal = 0;
+                    let counter = 0;
+
+                    //los controles para el contador de adultos
+                    const counterValueAdult = document.getElementById('counter-value-Adulto');
+                    const incrementBtnAdult = document.getElementById('increment-btn-Adulto');
+                    const decrementBtnAdult = document.getElementById('decrement-btn-Adulto');
+
+                    //los controles para el contador de ninnos
+                    const counterValueNinno = document.getElementById('counter-value-Ninno');
+                    const incrementBtnNinno = document.getElementById('increment-btn-Ninno');
+                    const decrementBtnNinno = document.getElementById('decrement-btn-Ninno');
+
+                    //los controles para el contador de personas para filtros en lista de destinos
+                    const counterValue = document.getElementById('counter-value');
+                    const incrementBtn = document.getElementById('increment-btn');
+                    const decrementBtn = document.getElementById('decrement-btn');
+
+
+                    const resetBtn = document.querySelector('#reset');
+
+                    const maxValueElement = document.getElementById('max_value');
+                    const maxValue = parseInt(maxValueElement.innerText);
+
+                    //objeto input html que lleva la sumatoria total
+                    const sumPersonas = document.getElementById('sum_person');
+                    const sumatoria = parseInt(sumPersonas.value);
+
+                    // para incrementar los valores del contador de adultos
+                    incrementBtnAdult.addEventListener('click', () => {
+                        if (sumaTotal < maxValue) {
+                            counterAdult++;
+                            sumaTotal++;
+                            counterValueAdult.value = counterAdult;
+                            sumPersonas.value = sumaTotal;
+                        }
+                    });
+
+                    // para decrementar los valores del contador de adultos
+                    decrementBtnAdult.addEventListener('click', () => {
+                        if (counterAdult == 0) {
+
+                        } else {
+
+                            counterAdult--;
+                            sumaTotal--;
+                            counterValueAdult.value = counterAdult;
+                            sumPersonas.value = sumaTotal;
+                        }
 
                     });
 
-                    //function updateValue(value) {
-                    //    document.getElementById("rangeValue").value = value;
-                    //}
+
+                    // para incrementar los valores del contador de ninnos
+                    incrementBtnNinno.addEventListener('click', () => {
+                        if (sumaTotal < maxValue) {
+                            counterNinno++;
+                            sumaTotal++;
+                            counterValueNinno.value = counterNinno;
+                            sumPersonas.value = sumaTotal;
+                        }
+                    });
+
+                    // para decrementar los valores del contador de ninnos
+                    decrementBtnNinno.addEventListener('click', () => {
+                        if (counterNinno == 0) {
+
+                        } else {
+
+                            counterNinno--;
+                            sumaTotal--;
+                            counterValueNinno.value = counterNinno;
+                            sumPersonas.value = sumaTotal;
+                        }
+
+                    });
+                    
+                    // para incrementar los valores del contador de personas en filtro en la lista de destinos
+                    incrementBtn.addEventListener('click', () => {
+                        if (counter < 20) {
+                            counter++;
+                            counterValue.value = counter;
+                        }
+                    });
+
+                    // para decrementar los valores del contador de personas en filtro en la lista de destinos
+                    decrementBtn.addEventListener('click', () => {
+                        if (counter == 0) {
+
+                        } else {
+
+                            counter--;
+                            counterValue.value = counter;
+                        }
+
+                    });
+                    
+                    
+                    // para resetear el contador a cero
+                    resetBtn.addEventListener('click', reset);
+
+                    function reset() {
+                        counterAdult = 0;
+                        counterNinno = 0;
+                        sumaTotal = 0;
+                        counterValueAdult.value = counterAdult;
+                        counterValueNinno.value = counterNinno;
+                        sumPersonas.value = sumaTotal;
+                    }
+
+
+                    // Prevenir form submission cuando estos botones son precionados
+                    document.getElementById('decrement-btn-Adulto').addEventListener('click', function(event) {
+                     event.preventDefault(); // Prevent the default form submission behavior
+                    // Your custom logic here, if needed
+                    });
+                    document.getElementById('increment-btn-Adulto').addEventListener('click', function(event) {
+                     event.preventDefault(); // Prevent the default form submission behavior
+                    // Your custom logic here, if needed
+                    });
+                    document.getElementById('decrement-btn-Ninno').addEventListener('click', function(event) {
+                     event.preventDefault(); // Prevent the default form submission behavior
+                    // Your custom logic here, if needed
+                    });
+                    document.getElementById('increment-btn-Ninno').addEventListener('click', function(event) {
+                     event.preventDefault(); // Prevent the default form submission behavior
+                    // Your custom logic here, if needed
+                    });
+                    
+
                 </script>
             </footer>
         </div>

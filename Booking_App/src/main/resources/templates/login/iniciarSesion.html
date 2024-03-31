@@ -14,14 +14,21 @@
                         <h3 style="text-align: center;">para reservar y disfrutar del viaje que planeas</h1>
                     </div>
                     <div class="col-md-6 col-10 mx-auto">
-                        <form method="POST">
+                        <form method="POST" th:action="@{/login}">
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="username" placeholder="Nombre de usuario">
+                                <input type="text" class="form-control" id="username" name="username" th:placeholder="#{login.username}">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="password" name="password" th:placeholder="#{login.password}">
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">Inciar Sesión</button>
+                            <div class="my-3">
+                                <a th:href="@{/registro/recordar}" class="text-secondary"><i class="fas fa-envelope"></i> [[#{accion.recordar}]]</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">[[#{login.login}]]</button>
+                            <div class="d-flex justify-content-center mt-3">
+                                <p class="me-2">¿Aún no tienes una cuenta?</p>
+                                <a th:href="@{/registro}" class=""><i class="fas fa-user-plus"></i> [[#{login.registrar}]]</a>
+                            </div>
                         </form>
                     </div>
                 </div>

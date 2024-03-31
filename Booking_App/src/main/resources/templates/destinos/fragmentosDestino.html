@@ -18,13 +18,13 @@
                     </div>
 
                     <div class="col-12">
-                        <form class="" id="form-buscar-destinos" action="" method="post">
+                        <form class="was-validated" id="form-buscar-destinos" th:action="@{/destinos/queryLocacion}" method="POST">
                             <div class="input-group flex-nowrap">
                                 <span class="input-group-text" id="addon-wrapping">
                                     <i class="fa-solid fa-bed"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="¿Adonde quieres ir?">
-                                    <button class="btn btn-orange" type="button">
+                                <input type="text" class="form-control" placeholder="¿Adonde quieres ir?" th:value="${locacion}" th:name="locacion" required="true"/>
+                                    <button class="btn btn-orange" type="submit">
                                         <i class="fa-solid fa-magnifying-glass"></i> Buscar
                                     </button>
                             </div>
@@ -49,14 +49,28 @@
                                 <h5 class="text-center pt-3">Personas</h5>
                             </div>
                             <hr>
+                                <div class="mb-3">
+                                    <div class="container">
+                                        <div class="counter">
+                                            <div class="counter">
+                                                <button id="decrement-btn">-</button>
+                                                <input type="number" id="counter-value" value="0">
+                                                <button id="increment-btn">+</button>
+                                            </div>
+                                        </div>
+                                        <button id="reset">Reset</button>
+                                    </div>
+                                </div>
                                 <div>
                                     <form method="POST" th:action="@{/destinos/queryPrecio}">
                                         <div class="mb-3">
                                             <h5 class="text-center pt-3">Precio</h5>
                                             <input type="range" class="form-range" min="25" max="500" step="5" id="price_range_slider"/>
-                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup"/>
+                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" value="0" required="true"/>
                                         </div>
-
+                                        <button class="btn-submit" type="submit" style="align-content: center;">
+                                         Aplicar filtros
+                                        </button>
                                     </form>
                                 </div>
                             <hr>
@@ -155,6 +169,30 @@
                                 </a>
                             </div>
                             <br/>
+                            <div><article><strong><h3 th:text="${destino.descripcion_general}"></h3></strong></article></div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <article>
+                                        <p>Huespedes: [[${destino.cantidad_huespedes}]]</p>
+                                    </article>
+                                </div>
+                                <div class="col">
+                                    <article>
+                                       <p>Habitaciones: [[${destino.habitaciones}]]</p> 
+                                    </article>
+                                </div>
+                                <div class="col">
+                                    <article>
+                                       <p>Camas: [[${destino.camas}]]</p>
+                                    </article>
+                                </div>
+                                <div class="col">
+                                    <article>
+                                        <p>Baños: [[${destino.bannos}]]</p>
+                                    </article>
+                                </div>
+                            </div>
+                            
                             <article>
                                 <h2>Descripción</h2>
                                 <p>[[${destino.descripcion_detalles}]]</p>
@@ -178,21 +216,92 @@
 
                     <div class="col-3">
                         <div class="card p-3">
-                            <h5 class="text-center pt-3">Fechas</h5>
-                            <div class="row d-flex justify-content-center">
-                                <div class="col text-center">
-                                    <label for="startDate">Desde:</label>
-                                    <input class="inputDate" type="date" id="startDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                            
+                            <form th:action="@{/reservaciones/guardar}" th:object="${reserva}"
+                                  method="POST" class="was-validated" enctype="multipart/form-data">
+                                <h4 style="text-align: center;">$[[${destino.precio_noche}]] por noche</h4>
+                                <hr>
+                                <!--<h5 class="text-center pt-3">Fechas</h5>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col text-center">
+                                        <label for="startDate">Desde:</label>
+                                        <input class="inputDate" type="date" id="startDate" name="fechaInicio">
+                                    </div>
+                                    <div class="col text-center">
+                                        <label for="endDate">Hasta:</label>
+                                        <input class="inputDate" type="date" id="endDate" name="fechaFinal">
+                                    </div>
                                 </div>
-                                <div class="col text-center">
-                                    <label for="endDate">Hasta:</label>
-                                    <input class="inputDate" type="date" id="endDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
-                                </div>
-                            </div>
-                            <hr>
-                                <div>
-                                    <h5 class="text-center pt-3">Personas</h5>
-                                </div>
+                                <hr>-->
+                                    <div>
+                                        <h5 class="text-center pt-3">Personas</h5>
+                                    </div>
+                                    <div class="container">
+                                        <div>
+                                            <p>A modo de prueba guardando la reserva para el usuario con id 1 o 2: 1-Pedro  2-Maria</p>
+                                             <!--esto se implementa luego de implementar seguridad para detectar que se guarde la reserva para el usuario que inicio sesion espeficicamente -->
+                                            <div class="mb-3">
+                                                <select name="usuario.idUsuario" 
+                                                        class="form-select" 
+                                                        aria-label="Default select example">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                           
+                                            <div class="mb-3">
+                                                <p>Este destino tiene el id: [[${destino.idDestino}]]</p>
+                                                <input type="number" class="form-control"  th:value="${destino.idDestino}" name="destino.idDestino" required="true">
+                                            </div>
+                                            <!--la cantidad de noches es a modo de prueba, programar logica que en base a las fechas seleccionadas en los datepickers se obtenga cuantas noches equivale -->
+                                            <p>A modo de prueba seleccionar la cantidad de noches</p>
+                                            <input type="number" class="form-control"  value="0" name="noches" required="true">
+                                            <!--precio total manual a modo de prueba, programar javascript que conforme se seleccionen la cantidad de noches vaya aumentado el precio en pantalla y este sera el que se guardara -->
+                                            <p>A modo de prueba ingresar manualmente el precio total</p>
+                                            <input type="number" class="form-control"  value="0" name="precio_total" required="true">
+                                           
+                               
+                                            <p>Cantidad Maxima de huespedes<p>
+                                            <h1 id="max_value" >[[${destino.cantidad_huespedes}]]</h1>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        Adultos
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <a href="javascript:void(0);" id="decrement-btn-Adulto">-</a>
+                                                        <input type="number" id="counter-value-Adulto" value="0" style="width: 64px;" name="cantidad_adultos">
+                                                        <a href="javascript:void(0);" id="increment-btn-Adulto">+</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container">
+                                                <div class="row">
+                                                     <div class="col-4">
+                                                        Niños
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <a href="javascript:void(0);" id="decrement-btn-Ninno">-</a>
+                                                        <input type="number" id="counter-value-Ninno" value="0" style="width: 64px;" name="cantidad_ninnos">
+                                                        <a href="javascript:void(0);" id="increment-btn-Ninno">+</a>
+                                                    </div>
+                                                    <br/>
+                                                    <a href="javascript:void(0);" id="reset">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="mb-3">
+                                        <p>Total Personas</p>
+                                        <div>
+                                            <input type="number" id="sum_person" value="0" disabled>
+                                        </div>
+                                    </div>
+                                    <button class="btn-submit" type="submit" style="align-content: center;">
+                                             Reservar
+                                    </button>
+                            </form>
                         </div>
 
                     </div>
