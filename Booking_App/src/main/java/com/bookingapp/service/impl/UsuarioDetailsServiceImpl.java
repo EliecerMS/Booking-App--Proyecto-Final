@@ -42,10 +42,23 @@ public class UsuarioDetailsServiceImpl implements UsuarioDetailsService, UserDet
         }
         
         // se recuperó la información del usuario y se agrega la imagen del usuario
+        session.removeAttribute("usuarioID");
         session.removeAttribute("usuarioImagen");
         session.removeAttribute("nombreCompleto");
+        session.removeAttribute("usuarioNombre");
+        session.removeAttribute("usuarioPrimerApellido");
+        session.removeAttribute("usuarioSegundoApellido");
+        session.removeAttribute("usuarioCorreo");
+        session.removeAttribute("usuarioTelefono");
+
+        session.setAttribute("usuarioID", usuario.getIdUsuario());
         session.setAttribute("usuarioImagen", usuario.getRutaImagen());
         session.setAttribute("nombreCompleto", usuario.getNombre() + " " + usuario.getPrimer_apellido() + " " + usuario.getSegundo_apellido());
+        session.setAttribute("usuarioNombre", usuario.getNombre());
+        session.setAttribute("usuarioPrimerApellido", usuario.getPrimer_apellido());
+        session.setAttribute("usuarioSegundoApellido", usuario.getSegundo_apellido());
+        session.setAttribute("usuarioCorreo", usuario.getEmail());
+        session.setAttribute("usuarioTelefono", usuario.getTelefono());
         
         // se van a recuperar los roles del usuario y se crean los roles ya como seguridad de spring
         // BD: ADMIN .... ROLE_ADMIN

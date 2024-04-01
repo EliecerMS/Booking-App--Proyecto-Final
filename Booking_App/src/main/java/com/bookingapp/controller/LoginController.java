@@ -32,9 +32,6 @@ public class LoginController {
     ======================================================*/
     @GetMapping("")
     public String inicio(Model model){
-        //var logins = loginService.getLogin();
-        //model.addAttribute("logins",logins);
-        //model.addAttribute("totalLogins", logins.size());
         model.addAttribute("title", "Login");
         return "/login/iniciarSesion";
     }
