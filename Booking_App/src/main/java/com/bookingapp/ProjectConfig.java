@@ -95,7 +95,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                 ).hasAnyRole("ADMIN", "VENDEDOR")
                 .requestMatchers("/facturar/carrito",
                         "perfil",
-                        "reservaciones",
+                        "reservaciones/**",
                         "facturacion")
                 .hasRole("USER")
                 )

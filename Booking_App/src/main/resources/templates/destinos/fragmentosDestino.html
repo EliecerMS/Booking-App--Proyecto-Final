@@ -37,11 +37,11 @@
                             <div class="row d-flex justify-content-center">
                                 <div class="col text-center">
                                     <label for="startDate">Desde:</label>
-                                    <input class="inputDate" type="date" id="startDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                    <input class="inputDate" type="date" id="startDate" name="trip-start">
                                 </div>
                                 <div class="col text-center">
                                     <label for="endDate">Hasta:</label>
-                                    <input class="inputDate" type="date" id="endDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                    <input class="inputDate" type="date" id="endDate" name="trip-start">
                                 </div>
                             </div>
                             <hr>
@@ -53,9 +53,9 @@
                                     <div class="container">
                                         <div class="counter">
                                             <div class="counter">
-                                                <button id="decrement-btn">-</button>
+                                                <a href="javascript:void(0);" id="decrement-btn">-</a>
                                                 <input type="number" id="counter-value" value="0">
-                                                <button id="increment-btn">+</button>
+                                                <a href="javascript:void(0);" id="increment-btn">+</a>
                                             </div>
                                         </div>
                                         <button id="reset">Reset</button>
@@ -219,26 +219,69 @@
                             
                             <form th:action="@{/reservaciones/guardar}" th:object="${reserva}"
                                   method="POST" class="was-validated" enctype="multipart/form-data">
-                                <h4 style="text-align: center;">$[[${destino.precio_noche}]] por noche</h4>
+                                <h4 style="text-align: center;">$<span id="precioNoche" th:text="${destino.precio_noche}"></span> <span>por noche</span></h4>
                                 <hr>
-                                <!--<h5 class="text-center pt-3">Fechas</h5>
+                                    <div>
+                                        <h5 class="text-center pt-3">Fechas</h5>
+                                        
+                                    </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col text-center">
                                         <label for="startDate">Desde:</label>
-                                        <input class="inputDate" type="date" id="startDate" name="fechaInicio">
+                                        <input class="inputDate" type="date" id="startDate" name="trip-start">
                                     </div>
                                     <div class="col text-center">
                                         <label for="endDate">Hasta:</label>
-                                        <input class="inputDate" type="date" id="endDate" name="fechaFinal">
+                                        <input class="inputDate" type="date" id="endDate" name="trip-end">
                                     </div>
                                 </div>
-                                <hr>-->
+                                    <hr>
                                     <div>
                                         <h5 class="text-center pt-3">Personas</h5>
+                                        <p style="text-align: center">Cantidad máxima de huespedes<p>
+                                        <h1 id="max_value" style="text-align: center">[[${destino.cantidad_huespedes}]]</h1>
                                     </div>
+                                        <br/>
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                    Adultos
+                                            </div>
+                                            <div class="col-8">
+                                                <a href="javascript:void(0);" id="decrement-btn-Adulto">-</a>
+                                                <input type="number" id="counter-value-Adulto"  style="width: 64px;" name="cantidad_adultos" readonly>
+                                                <a href="javascript:void(0);" id="increment-btn-Adulto">+</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <br/>
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Niños
+                                            </div>
+                                            <div class="col-8">
+                                                <a href="javascript:void(0);" id="decrement-btn-Ninno">-</a>
+                                                <input type="number" id="counter-value-Ninno"  style="width: 64px;" name="cantidad_ninnos" required="true" readonly>
+                                                <a href="javascript:void(0);" id="increment-btn-Ninno">+</a>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            
+                                                <p class="text-center">Total Personas:<input type="number" id="sum_person"  style=" border: none; width: 35px;" required="true" readonly></p>
+                                            
+                                        </div>
+                                            <br/>
+                                            <a href="javascript:void(0);" id="reset">Reset</a>
+                                            
+                                    
+                                    </div>
+                                        <br/>
+                                    
                                     <div class="container">
                                         <div>
-                                            <p>A modo de prueba guardando la reserva para el usuario con id 1 o 2: 1-Pedro  2-Maria</p>
+                                            <p>A modo de prueba guardan reserva para usuario con id 1 o 2: 1-Pedro 2-Maria</p>
                                              <!--esto se implementa luego de implementar seguridad para detectar que se guarde la reserva para el usuario que inicio sesion espeficicamente -->
                                             <div class="mb-3">
                                                 <select name="usuario.idUsuario" 
@@ -251,59 +294,25 @@
                                            
                                             <div class="mb-3">
                                                 <p>Este destino tiene el id: [[${destino.idDestino}]]</p>
-                                                <input type="number" class="form-control"  th:value="${destino.idDestino}" name="destino.idDestino" required="true">
-                                            </div>
-                                            <!--la cantidad de noches es a modo de prueba, programar logica que en base a las fechas seleccionadas en los datepickers se obtenga cuantas noches equivale -->
-                                            <p>A modo de prueba seleccionar la cantidad de noches</p>
-                                            <input type="number" class="form-control"  value="0" name="noches" required="true">
-                                            <!--precio total manual a modo de prueba, programar javascript que conforme se seleccionen la cantidad de noches vaya aumentado el precio en pantalla y este sera el que se guardara -->
-                                            <p>A modo de prueba ingresar manualmente el precio total</p>
-                                            <input type="number" class="form-control"  value="0" name="precio_total" required="true">
-                                           
-                               
-                                            <p>Cantidad Maxima de huespedes<p>
-                                            <h1 id="max_value" >[[${destino.cantidad_huespedes}]]</h1>
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        Adultos
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <a href="javascript:void(0);" id="decrement-btn-Adulto">-</a>
-                                                        <input type="number" id="counter-value-Adulto" value="0" style="width: 64px;" name="cantidad_adultos">
-                                                        <a href="javascript:void(0);" id="increment-btn-Adulto">+</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="container">
-                                                <div class="row">
-                                                     <div class="col-4">
-                                                        Niños
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <a href="javascript:void(0);" id="decrement-btn-Ninno">-</a>
-                                                        <input type="number" id="counter-value-Ninno" value="0" style="width: 64px;" name="cantidad_ninnos">
-                                                        <a href="javascript:void(0);" id="increment-btn-Ninno">+</a>
-                                                    </div>
-                                                    <br/>
-                                                    <a href="javascript:void(0);" id="reset">Reset</a>
-                                                </div>
+                                                <input  type="hidden" class="form-control"  th:value="${destino.idDestino}" name="destino.idDestino" required="true">
                                             </div>
                                         </div>
                                     </div>
                                     <br/>
-                                    <div class="mb-3">
-                                        <p>Total Personas</p>
-                                        <div>
-                                            <input type="number" id="sum_person" value="0" disabled>
-                                        </div>
+                                     <div class="text-center">
+                                        <p class="text-center">Noches: <input type="number" id="numberOfNights" name="noches" value="0" style=" border: none; width: 35px;" required="true" readonly></p>
                                     </div>
-                                    <button class="btn-submit" type="submit" style="align-content: center;">
-                                             Reservar
-                                    </button>
+                                    
+                                    <!--precio total manual a modo de prueba, programar javascript que conforme se seleccionen la cantidad de noches vaya aumentado el precio en pantalla y este sera el que se guardara -->
+                                    <div class="text-center">
+                                        <p class="text-center">Precio total: <input id="preciototal" type="number" class="form-control" name="precio_total" step="any" required="true" readonly></p>
+                                    </div>    
+                                    <br/>
+                                    <button class="btn-submit" type="submit" style="align-items: center;">Reservar</button>
+                                </div>
+                                    
                             </form>
                         </div>
-
                     </div>
 
                 </div>
