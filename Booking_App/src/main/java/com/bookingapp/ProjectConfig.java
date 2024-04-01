@@ -101,7 +101,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                 )
                 .formLogin((form) -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/perfil", true)
+                .defaultSuccessUrl("/", true) // redirecciona despues de login
                 .permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();
