@@ -5,6 +5,7 @@
 package com.bookingapp.service;
 
 import com.bookingapp.domain.Destino;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -21,6 +22,13 @@ public interface DestinoService {
     
     // Filtrar por precio noche
     public List<Destino> filtrarPrecioNoche(double precioSup);
+    
+    // Filtros totales
+    public List<Destino> filtroTotal(double precioSup,
+                             String startDate,
+                             String endDate,
+                             int cantidadHuespedes,
+                             int rating);
     
     // Filtrar por locacion
     public List<Destino> filtrarLocacion(String locacion);

@@ -7,6 +7,7 @@ package com.bookingapp.service.impl;
 import com.bookingapp.dao.DestinoDao;
 import com.bookingapp.domain.Destino;
 import com.bookingapp.service.DestinoService;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,4 +46,12 @@ public class DestinoServiceImpl implements DestinoService{
     public List<Destino> filtrarLocacion(String locacion) {
         return destinoDao.filtrarLocacion(locacion);
     }
+    
+   
+
+    @Override
+    public List<Destino> filtroTotal(double precioSup, String startDate, String endDate, int cantidadHuespedes, int rating) {
+        return destinoDao.filtroTotal(precioSup, startDate, endDate, cantidadHuespedes, rating);
+    }
+    
 }

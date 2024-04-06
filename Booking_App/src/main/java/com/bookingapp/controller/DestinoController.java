@@ -6,6 +6,9 @@ package com.bookingapp.controller;
 
 import com.bookingapp.domain.Destino;
 import com.bookingapp.service.DestinoService;
+import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,9 +49,10 @@ public class DestinoController {
     
     
     @GetMapping("detallesDestino/{idDestino}")
-    public String verDetallesDestino(Destino destino, Model model){
+    public String verDetallesDestino(Destino destino, Model model, HttpSession session){
         destino = destinoService.getDestino(destino);
         model.addAttribute("destino", destino);
+        model.addAttribute("usuarioID", session.getAttribute("usuarioID"));
         return "/destinos/detallesDestino";
     }
     
@@ -59,6 +63,29 @@ public class DestinoController {
         model.addAttribute("totalDestinos", destinos.size());
         
         model.addAttribute("precioSup", precioSup);
+        return "/destinos/listado";
+    }
+    
+     @PostMapping("/filtroTotal")
+    public String filtroTotal(@RequestParam(value = "precioSup") double precioSup, @RequestParam(value = "startDate") String startDate, 
+            @RequestParam(value = "endDate") String endDate,
+            @RequestParam(value = "maximoHuespedes") int maximoHuespedes,
+            @RequestParam(value = "rating") int rating,Model model) 
+    {
+        
+         /* Convertir las fechas al formato para ser aceptadas bien por mysql en la consulta que se hara
+        LocalDate convertStartDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate convertEndDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));*/
+        
+        var destinos = destinoService.filtroTotal(precioSup, startDate, endDate, maximoHuespedes, rating);
+        model.addAttribute("destinos", destinos);
+        model.addAttribute("totalDestinos", destinos.size());
+        
+        model.addAttribute("precioSup", precioSup);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("maximoHuespedes", maximoHuespedes);
+        model.addAttribute("rating", rating);
         return "/destinos/listado";
     }
     

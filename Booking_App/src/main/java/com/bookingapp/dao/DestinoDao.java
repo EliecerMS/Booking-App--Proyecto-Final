@@ -5,6 +5,7 @@
 package com.bookingapp.dao;
 
 import com.bookingapp.domain.Destino;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +26,18 @@ public interface DestinoDao extends JpaRepository<Destino,Long>{
     @Query(nativeQuery=true, 
             value="SELECT * FROM destino WHERE (destino.pais LIKE %:locacion% OR destino.ciudad LIKE %:locacion%)")
     public List<Destino> filtrarLocacion(@Param("locacion") String locacion);
+    
+    
+@Query(nativeQuery=true,
+       value="SELECT * FROM destino " +
+             "WHERE destino.precio_noche BETWEEN 0 AND :precioSup " +
+             "AND destino.start_date <= :startDate " +
+             "AND destino.end_date >= :finalDate " +
+             "AND destino.cantidad_huespedes >= :cantidadHuespedes " +
+             "AND destino.rating >= :rating")
+public List<Destino> filtroTotal(@Param("precioSup") double precioSup,
+                             @Param("startDate") String startDate,
+                             @Param("finalDate") String finalDate,
+                             @Param("cantidadHuespedes") int cantidadHuespedes,
+                             @Param("rating") int rating);
 }

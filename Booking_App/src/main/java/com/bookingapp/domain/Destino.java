@@ -7,6 +7,7 @@ package com.bookingapp.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.Data;
 
@@ -45,10 +46,13 @@ public class Destino implements Serializable{
     private String exclusion_tres;
     //
     private String condiciones_reembolso;
-    private String habitaciones;
-    private String cantidad_huespedes;
-    private String camas;
-    private String bannos;
+    private int habitaciones;
+    private int cantidad_huespedes;
+    private int camas;
+    private int bannos;
+    private int rating;
+    private LocalDate start_date;
+    private LocalDate end_date;
     
 
     @OneToMany
@@ -58,7 +62,7 @@ public class Destino implements Serializable{
     public Destino() {
     }
 
-    public Destino(long idDestino, String nombre_destino, String localizacion, String pais, String ciudad, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres, String condiciones_reembolso, String habitaciones, String cantidad_huespedes, String camas, String bannos) {
+    public Destino(long idDestino, String nombre_destino, String localizacion, String pais, String ciudad, String ruta_imagen, String descripcion_general, String descripcion_media, BigDecimal precio_noche, String descuento, String descripcion_detalles, String destacado, String inclusion_uno, String inclusion_dos, String inclusion_tres, String exclusion_uno, String exclusion_dos, String exclusion_tres, String condiciones_reembolso, int habitaciones, int cantidad_huespedes, int camas, int bannos, int rating, LocalDate start_date, LocalDate end_date, List<Reserva> reservas) {
         this.idDestino = idDestino;
         this.nombre_destino = nombre_destino;
         this.localizacion = localizacion;
@@ -82,17 +86,9 @@ public class Destino implements Serializable{
         this.cantidad_huespedes = cantidad_huespedes;
         this.camas = camas;
         this.bannos = bannos;
+        this.rating = rating;
+        this.start_date = start_date;
+        this.end_date = end_date;
     }
-
-    
-
-    
-
-    
-
-    
-
-    
-    
     
 }

@@ -32,53 +32,70 @@
                     </div>
 
                     <div class="col-3">
-                        <div class="card p-3">
-                            <h5 class="text-center pt-3">Fechas</h5>
-                            <div class="row d-flex justify-content-center">
-                                <div class="col text-center">
-                                    <label for="startDate">Desde:</label>
-                                    <input class="inputDate" type="date" id="startDate" name="trip-start">
-                                </div>
-                                <div class="col text-center">
-                                    <label for="endDate">Hasta:</label>
-                                    <input class="inputDate" type="date" id="endDate" name="trip-start">
-                                </div>
-                            </div>
-                            <hr>
-                            <div>
-                                <h5 class="text-center pt-3">Personas</h5>
-                            </div>
-                            <hr>
-                                <div class="mb-3">
-                                    <div class="container">
-                                        <div class="counter">
-                                            <div class="counter">
-                                                <a href="javascript:void(0);" id="decrement-btn">-</a>
-                                                <input type="number" id="counter-value" value="0">
-                                                <a href="javascript:void(0);" id="increment-btn">+</a>
-                                            </div>
-                                        </div>
-                                        <button id="reset">Reset</button>
+                        <form method="POST" th:action="@{/destinos/filtroTotal}">
+                            <div class="card p-3">
+                                <h5 class="text-center pt-3">Fechas</h5>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col text-center">
+                                        <label for="startDate">Desde:</label>
+                                        <input class="inputDate" type="date" id="startDate" name="startDate" required="true">
+                                    </div>
+                                    <div class="col text-center">
+                                        <label for="endDate">Hasta:</label>
+                                        <input class="inputDate" type="date" id="endDate" name="endDate">
                                     </div>
                                 </div>
+                                <hr>
                                 <div>
-                                    <form method="POST" th:action="@{/destinos/queryPrecio}">
-                                        <div class="mb-3">
-                                            <h5 class="text-center pt-3">Precio</h5>
-                                            <input type="range" class="form-range" min="25" max="500" step="5" id="price_range_slider"/>
-                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" value="0" required="true"/>
-                                        </div>
-                                        <button class="btn-submit" type="submit" style="align-content: center;">
-                                         Aplicar filtros
-                                        </button>
-                                    </form>
-                                </div>
-                            <hr>
-                                <div>
-                                    <h5 class="text-center pt-3">Calificación</h5>
-                                </div>
+                                    <h5 class="text-center pt-3">Personas</h5>
                                 </div>
 
+                                    <div class="mb-3 text-center">
+                                        <div class="container">
+                                            
+                                                <div class="counter">
+                                                    <span>
+                                                        <a href="javascript:void(0);" id="decrement-btn">-</a>
+                                                        <input type="number" id="counter-value" style="padding-left: 10px; padding-right: 10px;" name="maximoHuespedes" required="true">
+                                                        <a href="javascript:void(0);" id="increment-btn">+</a>
+                                                    </span>
+                                                </div>
+                                            <br/>
+                                            <button id="reset">Reset</button>
+                                        </div>
+                                    </div>
+                                <hr>
+                                    <div class="rating">
+                                        <h5 class="text-center pt-3">Calificación</h5>
+                                        <input type="radio" id="star5" name="rating" value="5" required="true">
+                                        <label for="star5">&#9733;</label>
+                                        <input type="radio" id="star4" name="rating" value="4" required="true">
+                                        <label for="star4">&#9733;</label>
+                                        <input type="radio" id="star3" name="rating" value="3" required="true">
+                                        <label for="star3">&#9733;</label>
+                                        <input type="radio" id="star2" name="rating" value="2" required="true">
+                                        <label for="star2">&#9733;</label>
+                                        <input type="radio" id="star1" name="rating" value="1" required="true">
+                                        <label for="star1">&#9733;</label>       
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="mb-3 text-center">
+                                            <h5 class="pt-3">Precio por noche</h5>
+                                            <div class="container">
+                                                <div class="range-container">
+                                                    <input type="range" class="custom-range" min="0" max="500" step="5" id="price_range_slider"/>
+                                                  <div class="bubble">0</div>
+                                                </div>
+                                             </div>
+                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" value="0" required="true"/>
+                                            <br/>
+                                            <button class="btn-submit" type="submit" style="align-content: center;">Aplicar filtros</button>
+                                        </div>
+                                            
+                                    </div>
+                            </div>
+                        </form>  
                     </div>
 
 
@@ -228,11 +245,11 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col text-center">
                                         <label for="startDate">Desde:</label>
-                                        <input class="inputDate" type="date" id="startDate" name="trip-start">
+                                        <input class="inputDate" type="date" id="startDate" name="trip-start" required="true">
                                     </div>
                                     <div class="col text-center">
                                         <label for="endDate">Hasta:</label>
-                                        <input class="inputDate" type="date" id="endDate" name="trip-end">
+                                        <input class="inputDate" type="date" id="endDate" name="trip-end" required="true">
                                     </div>
                                 </div>
                                     <hr>
@@ -249,7 +266,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <a href="javascript:void(0);" id="decrement-btn-Adulto">-</a>
-                                                <input type="number" id="counter-value-Adulto"  style="width: 64px;" name="cantidad_adultos" readonly>
+                                                <input type="number" id="counter-value-Adulto"  style="width: 64px;" name="cantidad_adultos" required="true">
                                                 <a href="javascript:void(0);" id="increment-btn-Adulto">+</a>
                                             </div>
                                         </div>
@@ -262,27 +279,25 @@
                                             </div>
                                             <div class="col-8">
                                                 <a href="javascript:void(0);" id="decrement-btn-Ninno">-</a>
-                                                <input type="number" id="counter-value-Ninno"  style="width: 64px;" name="cantidad_ninnos" required="true" readonly>
+                                                <input type="number" id="counter-value-Ninno"  style="width: 64px;" name="cantidad_ninnos">
                                                 <a href="javascript:void(0);" id="increment-btn-Ninno">+</a>
                                             </div>
                                         </div>
                                         <br/>
                                         <div class="row">
-                                            
-                                                <p class="text-center">Total Personas:<input type="number" id="sum_person"  style=" border: none; width: 35px;" required="true" readonly></p>
-                                            
+                                            <p class="text-center">Total Personas:<input type="number" id="sum_person"  style=" border: none; width: 35px;"></p>
                                         </div>
-                                            <br/>
-                                            <a href="javascript:void(0);" id="reset">Reset</a>
-                                            
-                                    
-                                    </div>
                                         <br/>
-                                    
+                                            
+                                        
+                                    </div>
+                                        <div class="mb-3">
+                                        <a href="javascript:void(0);" id="reset">Reset</a>
+                                    </div>
                                     <div class="container">
                                         <div>
-                                            <p>A modo de prueba guardan reserva para usuario con id 1 o 2: 1-Pedro 2-Maria</p>
-                                             <!--esto se implementa luego de implementar seguridad para detectar que se guarde la reserva para el usuario que inicio sesion espeficicamente -->
+                                            <!--<p>A modo de prueba guardan reserva para usuario con id 1 o 2: 1-Pedro 2-Maria</p>
+                                             <!--esto se implementa luego de implementar seguridad para detectar que se guarde la reserva para el usuario que inicio sesion espeficicamente 
                                             <div class="mb-3">
                                                 <select name="usuario.idUsuario" 
                                                         class="form-select" 
@@ -290,12 +305,13 @@
                                                     <option>1</option>
                                                     <option>2</option>
                                                 </select>
-                                            </div>
+                                            </div>-->
                                            
                                             <div class="mb-3">
-                                                <p>Este destino tiene el id: [[${destino.idDestino}]]</p>
+                                                 <!--<p>Este destino tiene el id: [[${destino.idDestino}]]</p>-->
                                                 <input  type="hidden" class="form-control"  th:value="${destino.idDestino}" name="destino.idDestino" required="true">
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <br/>
@@ -303,15 +319,20 @@
                                         <p class="text-center">Noches: <input type="number" id="numberOfNights" name="noches" value="0" style=" border: none; width: 35px;" required="true" readonly></p>
                                     </div>
                                     
-                                    <!--precio total manual a modo de prueba, programar javascript que conforme se seleccionen la cantidad de noches vaya aumentado el precio en pantalla y este sera el que se guardara -->
+                                    <!--PENDIENTE: precio total hacerlo espacio no editable : readonly, pero ue a pesar de eso si se pueda tomar el parametro por medio del form -->
                                     <div class="text-center">
-                                        <p class="text-center">Precio total: <input id="preciototal" type="number" class="form-control" name="precio_total" step="any" required="true" readonly></p>
+                                        <p class="text-center">Precio total: <input id="preciototal" type="number" class="form-control" name="precio_total" step="any" required="true"></p>
                                     </div>    
                                     <br/>
+                                    <div class="mb-3" sec:authorize="isAuthenticated()">
+                                        <!--<p>Este usuario tiene el id: <span th:text="${usuarioID}"></span></p>-->
+                                        <input type="hidden" class="form-control"  th:value="${usuarioID}" name="usuario.idUsuario" required="true">
+                                    </div> 
                                     <button class="btn-submit" type="submit" style="align-items: center;">Reservar</button>
                                 </div>
                                     
                             </form>
+                            
                         </div>
                     </div>
 
