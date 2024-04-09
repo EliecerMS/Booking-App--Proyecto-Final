@@ -38,11 +38,11 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col text-center">
                                         <label for="startDate">Desde:</label>
-                                        <input class="inputDate" type="date" id="startDate" name="startDate" required="true">
+                                        <input class="inputDate" type="date" id="startDate" name="startDate" >
                                     </div>
                                     <div class="col text-center">
                                         <label for="endDate">Hasta:</label>
-                                        <input class="inputDate" type="date" id="endDate" name="endDate">
+                                        <input class="inputDate" type="date" id="endDate" name="endDate" >
                                     </div>
                                 </div>
                                 <hr>
@@ -56,7 +56,7 @@
                                                 <div class="counter">
                                                     <span>
                                                         <a href="javascript:void(0);" id="decrement-btn">-</a>
-                                                        <input type="number" id="counter-value" style="padding-left: 10px; padding-right: 10px;" value="1" name="maximoHuespedes" required="true">
+                                                        <input type="number" id="counter-value" style="padding-left: 10px; padding-right: 10px;" value="1" name="maximoHuespedes">
                                                         <a href="javascript:void(0);" id="increment-btn">+</a>
                                                     </span>
                                                 </div>
@@ -67,15 +67,15 @@
                                 <hr>
                                     <div class="rating">
                                         <h5 class="text-center pt-3">Calificación</h5>
-                                        <input type="radio" id="star5" name="rating" value="5" required="true">
+                                        <input type="radio" id="star5" name="rating" value="5" >
                                         <label for="star5">&#9733;</label>
-                                        <input type="radio" id="star4" name="rating" value="4" required="true">
+                                        <input type="radio" id="star4" name="rating" value="4" >
                                         <label for="star4">&#9733;</label>
-                                        <input type="radio" id="star3" name="rating" value="3" required="true">
+                                        <input type="radio" id="star3" name="rating" value="3" >
                                         <label for="star3">&#9733;</label>
-                                        <input type="radio" id="star2" name="rating" value="2" required="true">
+                                        <input type="radio" id="star2" name="rating" value="2" >
                                         <label for="star2">&#9733;</label>
-                                        <input type="radio" id="star1" name="rating" value="1" required="true">
+                                        <input type="radio" id="star1" name="rating" value="1" >
                                         <label for="star1">&#9733;</label>       
                                     </div>
                                     <hr>
@@ -88,7 +88,7 @@
                                                   <div class="bubble">0</div>
                                                 </div>
                                              </div>
-                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" value="0" required="true"/>
+                                            <input id="rangeValue" type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" value="0"/>
                                             <br/>
                                             <button class="btn-submit" type="submit" style="align-content: center;">Aplicar filtros</button>
                                         </div>

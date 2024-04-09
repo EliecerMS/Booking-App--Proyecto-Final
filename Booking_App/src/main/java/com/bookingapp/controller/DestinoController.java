@@ -67,15 +67,16 @@ public class DestinoController {
     }
     
      @PostMapping("/filtroTotal")
-    public String filtroTotal(@RequestParam(value = "precioSup") double precioSup, @RequestParam(value = "startDate") String startDate, 
+    public String filtroTotal(@RequestParam(value = "precioSup", required = false) Double precioSup, @RequestParam(value = "startDate") String startDate, 
             @RequestParam(value = "endDate") String endDate,
-            @RequestParam(value = "maximoHuespedes") int maximoHuespedes,
-            @RequestParam(value = "rating") int rating,Model model) 
+            @RequestParam(value = "maximoHuespedes") Integer maximoHuespedes,
+            @RequestParam(value = "rating", required = false) Integer rating,Model model) 
     {
-        
-         /* Convertir las fechas al formato para ser aceptadas bien por mysql en la consulta que se hara
-        LocalDate convertStartDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDate convertEndDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));*/
+    
+        if(startDate.equalsIgnoreCase("") ||  endDate.equalsIgnoreCase("")){
+            startDate = null;
+            endDate = null;
+        }
         
         var destinos = destinoService.filtroTotal(precioSup, startDate, endDate, maximoHuespedes, rating);
         model.addAttribute("destinos", destinos);

@@ -30,14 +30,14 @@ public interface DestinoDao extends JpaRepository<Destino,Long>{
     
 @Query(nativeQuery=true,
        value="SELECT * FROM destino " +
-             "WHERE destino.precio_noche BETWEEN 0 AND :precioSup " +
-             "AND destino.start_date <= :startDate " +
-             "AND destino.end_date >= :finalDate " +
-             "AND destino.cantidad_huespedes >= :cantidadHuespedes " +
-             "AND destino.rating >= :rating")
-public List<Destino> filtroTotal(@Param("precioSup") double precioSup,
+             "WHERE (:precioSup IS NULL OR destino.precio_noche BETWEEN 0 AND :precioSup) " +
+             "AND (:startDate IS NULL OR destino.start_date <= :startDate) " +
+             "AND (:finalDate IS NULL OR destino.end_date >= :finalDate) " +
+             "AND (:cantidadHuespedes IS NULL OR destino.cantidad_huespedes >= :cantidadHuespedes) " +
+             "AND (:rating IS NULL OR destino.rating >= :rating)")
+public List<Destino> filtroTotal(@Param("precioSup") Double precioSup,
                              @Param("startDate") String startDate,
                              @Param("finalDate") String finalDate,
-                             @Param("cantidadHuespedes") int cantidadHuespedes,
-                             @Param("rating") int rating);
+                             @Param("cantidadHuespedes") Integer cantidadHuespedes,
+                             @Param("rating") Integer rating);
 }

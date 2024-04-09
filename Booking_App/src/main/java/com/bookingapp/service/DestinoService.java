@@ -24,11 +24,11 @@ public interface DestinoService {
     public List<Destino> filtrarPrecioNoche(double precioSup);
     
     // Filtros totales
-    public List<Destino> filtroTotal(double precioSup,
+    public List<Destino> filtroTotal(Double precioSup,
                              String startDate,
                              String endDate,
-                             int cantidadHuespedes,
-                             int rating);
+                             Integer cantidadHuespedes,
+                             Integer rating);
     
     // Filtrar por locacion
     public List<Destino> filtrarLocacion(String locacion);

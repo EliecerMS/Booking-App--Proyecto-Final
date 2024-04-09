@@ -50,7 +50,7 @@ public class DestinoServiceImpl implements DestinoService{
    
 
     @Override
-    public List<Destino> filtroTotal(double precioSup, String startDate, String endDate, int cantidadHuespedes, int rating) {
+    public List<Destino> filtroTotal(Double precioSup, String startDate, String endDate, Integer cantidadHuespedes, Integer rating) {
         return destinoDao.filtroTotal(precioSup, startDate, endDate, cantidadHuespedes, rating);
     }
     
