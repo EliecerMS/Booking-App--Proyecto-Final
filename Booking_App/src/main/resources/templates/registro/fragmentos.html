@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Registro</title>
+    </head>
+    <body>
+        <!-- 1 Fragmento que se utiliza en la página para regresar -->
+        <section th:fragment="newUsuario">
+            <div class="row py-2 justify-content-center">
+                <div class="col-md-3">
+                    <section>
+                        <div class="col-md-4 d-grid">
+                            <a th:href="@{/login}" class="btn btn-primary">
+                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            <div class="row py-2 justify-content-center">
+                <div class="col-md-3">
+                    <form method="POST" th:action="@{/registro/crearUsuario}" th:object="${usuario}" class="was-validated">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{usuario.agregar}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                    <input type="text" class="form-control" name="username" th:field="*{username}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="nombre">[[#{usuario.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="apellidos">[[#{usuario.apellidos}]]</label>
+                                    <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}"
+                                           required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="email">[[#{usuario.correo}]]</label>
+                                    <input type="email" class="form-control" 
+                                           name="correo" th:field="*{correo}"
+                                           required="true"/></div></div>
+                            <div class="card-footer text-end">                                                
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-envelope"></i> [[#{usuario.activacion}]]
+                                </button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        
+        <section th:fragment="nuevoUsuario">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters vh-100">
+                        <div class="col-6 bg-image d-flex align-items-center justify-content-center"></div>
+                        <div class="col-6 d-flex align-items-center justify-content-center" style="padding: 70px;">
+                            <div class="container">
+                                <h2 style="text-align: center;">Permitenos ser parte de tus sueños de viaje
+                                </h2>
+                                <br>
+                                    <h3 style="text-align: center;">Inicia una cuenta con nosotros</h3>
+                                    <form method="POST" th:action="@{/registro/crearUsuario}" th:object="${usuario}" class="was-validated">
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required="true">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="primer_apellido" placeholder="Primer Apellido" required="true">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="segundo_apellido" placeholder="Segundo Apellido" required="true">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required="true">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="true">
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="password" class="form-control" placeholder="Contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                                            </div>
+                                        </div>-->
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                 <button type="submit" class="btn btn-success" style="width: 100%; background-color: rgb(224, 124, 30); border-color: rgb(224, 124, 30);">
+                                                <i class="fas fa-envelope"></i> [[#{usuario.activacion}]]</button>
+                                            </div>
+                                                <!--<a href="perfil" type="submit" class="btn btn-primary">Activar</a>-->
+                                        </div>
+                                        
+                                        <div class="d-flex justify-content-center mt-3">
+                                            
+                                                <p class="me-2">¿Ya tienes una cuenta?</p>
+                                                <a th:href="@{/login}" class=""><i class="fas fa-user"></i> [[#{login.login}]]</a>
+                                            
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- 2 Fragmento que se utiliza activar un usuario -->
+        <section th:fragment="activarUsuario">
+            <div class="row py-2 justify-content-center">
+                <div class="col-md-3">
+                    <form method="POST" th:action="@{/registro/activar}" th:object="${usuario}" class="was-validated" enctype="multipart/form-data">
+                        <input type="hidden" name="idUsuario" th:field="*{idUsuario}"/>
+                        <div class="card">
+                            <div class="card-header align-items-center">
+                                <h4>[[#{registro.activar}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                    <input type="text" class="form-control" name="username" th:field="*{username}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="nombre">[[#{usuario.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="apellidos">[[#{usuario.apellidos}]]</label>
+                                    <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="email">[[#{usuario.correo}]]</label>
+                                    <input type="email" class="form-control" name="correo" th:field="*{correo}" required="true"/></div>
+                                <div class="mb-3">
+                                    <label for="telefono">[[#{usuario.telefono}]]</label>
+                                    <input type="tel" class="form-control" name="telefono" th:field="*{telefono}"/></div>
+                                <div class="mb-3">
+                                    <label for="password">[[#{usuario.password}]]</label>
+                                    <input type="password" class="form-control" name="password" th:field="*{password}"/></div>
+                                <div class="mb-3">
+                                    <label for="imagen">[[#{usuario.imagen}]]</label>
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);" />
+                                    <img id="blah" th:src="@{${usuario.rutaImagen}}" alt="your image" height="200"/>
+                                </div>                                                
+                            </div>
+                            <div class="card-footer align-items-center">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i> [[#{usuario.activacion}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Fragmento que se utiliza recordar un usuario -->
+        <section th:fragment="recordarUsuario">
+            <div class="row py-2 justify-content-center">
+                <div class="col-md-3">
+                    <section>
+                        <div class="col-md-4 d-grid">
+                            <a th:href="@{/login}" class="btn btn-primary">
+                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row py-2 justify-content-center">
+                <div class="col-md-3">
+                    <form method="POST"
+                          th:action="@{/registro/recordarUsuario}" th:object="${usuario}"
+                          class="was-validated">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{registro.recordar.us}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                    <input type="text" class="form-control" name="username" th:field="*{username}"/></div>                                                
+                                <div class="mb-3">
+                                    <label for="email">[[#{usuario.correo}]]</label>
+                                    <input type="email" class="form-control" name="correo" th:field="*{correo}"/></div>
+                            </div>
+                            <div class="card-footer text-end">                                                
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-address-card"></i> [[#{registro.recordar.us}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
