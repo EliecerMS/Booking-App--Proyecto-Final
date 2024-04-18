@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>        
+        <title>Booking App</title>        
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
@@ -15,6 +15,10 @@
                     </div>
                     <div class="card-body">
                         <strong>[[${mensaje}]]</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- [[${enlace}]] -->
+                        <a th:href="@{${enlace}}" >[[${nombreEnlace}]]</a>
                     </div>
                 </div>
             </div>

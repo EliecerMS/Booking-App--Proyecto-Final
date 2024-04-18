@@ -6,6 +6,7 @@ package com.bookingapp.controller;
 
 import com.bookingapp.domain.Usuario;
 import com.bookingapp.service.RegistroService;
+import com.bookingapp.service.UsuarioService;
 import jakarta.mail.MessagingException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,9 @@ public class RegistroController {
     @Autowired
     private RegistroService registroService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
 
     /*======================================================
     * RUTA: default a formulario de registro
@@ -38,51 +42,42 @@ public class RegistroController {
     ======================================================*/
     @GetMapping("")
     public String nuevo(Model model, Usuario usuario) {
-        // var registros = registroService.getRegistro();
-        // model.addAttribute("registros",registros);
-        //model.addAttribute("totalRegistros", registros.size());
-        //model.addAttribute("title", "Regístrate");
         return "registro/registro";
     }
-    
-
-    /*@GetMapping("/nuevo")
-    public String nuevo(Model model, Usuario usuario) {
-        return "/registro/nuevo";
-    }*/
 
     @GetMapping("/recordar")
     public String recordar(Model model, Usuario usuario) {
-        return "/registro/recordar";
+        return "registro/recordar";
     }
 
     @PostMapping("/crearUsuario")
-    public String crearUsuario(Model model, Usuario usuario) 
+    public String crearUsuario(Model model, Usuario usuario)
             throws MessagingException {
         model = registroService.crearUsuario(model, usuario);
         return "/registro/salida";
     }
 
-    @GetMapping("/activacion/{usuario}/{id}")
-    public String activar( Model model, @PathVariable(value = "usuario") String usuario, @PathVariable(value = "id") String id) {
-        model = registroService.activar(model, usuario, id);
-        if (model.containsAttribute("usuario")) {
-            return "/registro/activa";
-        } else {
-            return "/registro/salida";
-        }
-    }
-
-    @PostMapping("/activar")
-    public String activar( Usuario usuario) {
-        registroService.activar(usuario);
-        return "redirect:/";
-    }
-
     @PostMapping("/recordarUsuario")
-    public String recordarUsuario(Model model, Usuario usuario) 
+    public String recordarUsuario(Model model, Usuario usuario)
             throws MessagingException {
         model = registroService.recordarUsuario(model, usuario);
         return "/registro/salida";
     }
+
+    @GetMapping("/reestablecerAcceso/{idUsuario}")
+    public String reestablecerAcceso(Model model, Usuario usuario) {
+        usuario = usuarioService.getUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "/registro/reestablecer";
+    }
+
+    @PostMapping("/cambiarContrasenna")
+    public String cambiarContrasenna(Model model, Usuario usuario)
+            throws MessagingException {
+        model = registroService.cambiarContrasennaUsuario(model, usuario);
+        return "/registro/salida";
+    }
+    
+    
+
 }

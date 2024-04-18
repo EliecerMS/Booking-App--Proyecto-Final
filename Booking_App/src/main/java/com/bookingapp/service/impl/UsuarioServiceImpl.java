@@ -78,4 +78,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
+    
+    //Agregado -------------
+    @Override
+    @Transactional
+    public Usuario existeUsuarioPorEmailYTelefono(String email, String telefono){
+        return usuarioDao.findByEmailAndTelefono(email,telefono);
+    }
 }

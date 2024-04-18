@@ -24,79 +24,31 @@ import org.springframework.ui.Model;
 @Service
 public class RegistroServiceImpl implements RegistroService{
     
-    @Autowired
-    private CorreoService correoService;
+    /*@Autowired
+    private CorreoService correoService;*/
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private MessageSource messageSource;  //creado en semana 4...
-    
-
-    @Override
-    public Model activar(Model model, String username, String clave) {
-        Usuario usuario = 
-                usuarioService.getUsuarioPorUsernameYPassword(username, 
-                        clave);
-        if (usuario != null) {
-            model.addAttribute("usuario", usuario);
-        } else {
-            model.addAttribute(
-                    "titulo", 
-                    messageSource.getMessage(
-                            "registro.activar", 
-                            null,  Locale.getDefault()));
-            model.addAttribute(
-                    "mensaje", 
-                    messageSource.getMessage(
-                            "registro.activar.error", 
-                            null, Locale.getDefault()));
-        }
-        return model;
-    }
-
-    @Override
-    public void activar(Usuario usuario) {
-        var codigo = new BCryptPasswordEncoder();
-        usuario.setPassword(codigo.encode(usuario.getPassword()));
-        usuarioService.save(usuario, true);
-    }
-
+    private MessageSource messageSource;  
+   
+ 
     @Override
     public Model crearUsuario(Model model, Usuario usuario) 
             throws MessagingException {
         String mensaje;
-        if (!usuarioService.
-                existeUsuarioPorUsernameOEmail(
-                        usuario.getUsername(), 
-                        usuario.getEmail())) {
-            String clave = demeClave();
-            usuario.setPassword(clave);
-            usuario.setActivo(false);
+        if (!usuarioService.existeUsuarioPorUsernameOEmail(usuario.getUsername(), usuario.getEmail())) {
+            //String clave = demeClave();
+            //Encode de la clave
+            var codigo = new BCryptPasswordEncoder();
+            usuario.setPassword(codigo.encode(usuario.getPassword()));
+            usuario.setActivo(true);
             usuarioService.save(usuario, true);
-            enviaCorreoActivar(usuario, clave);
-            mensaje = String.format(
-                    messageSource.getMessage(
-                            "registro.mensaje.activacion.ok", 
-                            null, 
-                            Locale.getDefault()),
-                    usuario.getEmail());
+            mensaje = String.format( messageSource.getMessage("registro.mensaje.activacion.ok", null, Locale.getDefault()), usuario.getEmail());
         } else {
-            mensaje = String.format(
-                    messageSource.getMessage(
-                            "registro.mensaje.usuario.o.correo", 
-                            null, 
-                            Locale.getDefault()),
-                    usuario.getUsername(), usuario.getEmail());
+            mensaje = String.format(messageSource.getMessage("registro.mensaje.usuario.o.correo", null, Locale.getDefault()),usuario.getUsername(), usuario.getEmail());
         }
-        model.addAttribute(
-                "titulo", 
-                messageSource.getMessage(
-                        "registro.activar", 
-                        null, 
-                        Locale.getDefault()));
-        model.addAttribute(
-                "mensaje", 
-                mensaje);
+        model.addAttribute("titulo", messageSource.getMessage("registro.activar", null, Locale.getDefault()));
+        model.addAttribute("mensaje", mensaje);
         return model;
     }
 
@@ -104,82 +56,47 @@ public class RegistroServiceImpl implements RegistroService{
     public Model recordarUsuario(Model model, Usuario usuario) 
             throws MessagingException {
         String mensaje;
-        Usuario usuario2 = usuarioService.getUsuarioPorUsernameOEmail(
-                usuario.getUsername(), 
-                usuario.getEmail());
+        String enlace;
+        String nombreEnlace;
+        Usuario usuario2 = usuarioService.existeUsuarioPorEmailYTelefono(usuario.getEmail(), usuario.getTelefono()); /// agregado ------------
         if (usuario2 != null) {
-            String clave = demeClave();
-            usuario2.setPassword(clave);
             usuario2.setActivo(false);
             usuarioService.save(usuario2, false);
-            enviaCorreoRecordar(usuario2, clave);
-            mensaje = String.format(
-                    messageSource.getMessage(
-                            "registro.mensaje.recordar.ok", 
-                            null, 
-                            Locale.getDefault()),
-                    usuario.getEmail());
-        } else {
-            mensaje = String.format(
-                    messageSource.getMessage(
-                            "registro.mensaje.usuario.o.correo", 
-                            null, 
-                            Locale.getDefault()),
+            mensaje = String.format( messageSource.getMessage("recuperar.username", null, Locale.getDefault()),usuario2.getUsername());
+            enlace = "reestablecerAcceso/"+usuario2.getIdUsuario();
+            nombreEnlace = "Reestablecer contraseña";
+            model.addAttribute("enlace", enlace);
+            model.addAttribute("nombreEnlace", nombreEnlace);
+        }
+        else{
+            mensaje = String.format(messageSource.getMessage("registro.mensaje.recordar.no.encontrado", null, Locale.getDefault()),
                     usuario.getUsername(), usuario.getEmail());
         }
-        model.addAttribute(
-                "titulo", 
-                messageSource.getMessage(
-                        "registro.activar", 
-                        null, 
-                        Locale.getDefault()));
-        model.addAttribute(
-                "mensaje", 
-                mensaje);
+        model.addAttribute("titulo", messageSource.getMessage("registro.activar", null, Locale.getDefault()));
+        model.addAttribute("mensaje", mensaje);
+        
         return model;
     }
 
-    private String demeClave() {
-        String tira = "ABCDEFGHIJKLMNOPQRSTUXYZabcdefghijklmnopqrstuvwxyz0123456789_*+-";
-        String clave = "";
-        for (int i = 0; i < 40; i++) {
-            clave += tira.charAt((int) (Math.random() * tira.length()));
+
+    @Override
+     public Model cambiarContrasennaUsuario(Model model, Usuario usuario) throws MessagingException{
+         String mensaje;
+        
+        Usuario usuario2 = usuarioService.getUsuario(usuario);
+        if (usuario2 != null) {
+            var codigo = new BCryptPasswordEncoder();
+            usuario2.setPassword(codigo.encode(usuario.getPassword()));
+            usuario2.setActivo(true);
+            usuarioService.save(usuario2, false);
+            mensaje = String.format( messageSource.getMessage("contrasenna.success", null, Locale.getDefault()));
         }
-        return clave;
-    }
-
-    //Ojo cómo le lee una informacion del application.properties
-    @Value("${servidor.http}")
-    private String servidor;
-
-    private void enviaCorreoActivar(Usuario usuario, String clave) throws MessagingException {
-        String mensaje = messageSource.getMessage(
-                "registro.correo.activar", 
-                null, Locale.getDefault());
-        mensaje = String.format(
-                mensaje, usuario.getNombre(), 
-                usuario.getPrimer_apellido(), servidor, 
-                usuario.getUsername(), clave);
-        String asunto = messageSource.getMessage(
-                "registro.mensaje.activacion", 
-                null, Locale.getDefault());
-        correoService.enviarCorreoHtml(usuario.getEmail(), asunto, mensaje);
-    }
-
-    private void enviaCorreoRecordar(Usuario usuario, String clave) throws MessagingException {
-        String mensaje = messageSource.getMessage(""
-                + "registro.correo.recordar", 
-                null, 
-                Locale.getDefault());
-        mensaje = String.format(
-                mensaje, usuario.getNombre(), 
-                usuario.getPrimer_apellido(), servidor, 
-                usuario.getUsername(), clave);
-        String asunto = messageSource.getMessage(
-                "registro.mensaje.recordar", 
-                null, Locale.getDefault());
-        correoService.enviarCorreoHtml(
-                usuario.getEmail(), 
-                asunto, mensaje);
-    }
+        else{
+            mensaje = String.format(messageSource.getMessage("contrasenna.fail", null, Locale.getDefault()));
+        }
+        model.addAttribute("titulo", messageSource.getMessage("registro.activar", null, Locale.getDefault()));
+        model.addAttribute("mensaje", mensaje);
+        
+        return model;
+     }
 }

@@ -28,6 +28,9 @@ public interface UsuarioService {
     // Se valida si existe un Usuario considerando el username
     public boolean existeUsuarioPorUsernameOEmail(String username, String correo);
     
+    //agregado
+    public Usuario existeUsuarioPorEmailYTelefono(String correo,String telefono);
+    
     // Se inserta un nuevo usuario si el id del usuario esta vacío
     // Se actualiza un usuario si el id del usuario NO esta vacío
     public void save(Usuario usuario,boolean crearRolUser);

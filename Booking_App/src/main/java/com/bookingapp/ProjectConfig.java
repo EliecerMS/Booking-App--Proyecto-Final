@@ -77,7 +77,8 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/images/**", // acceso a images
                         "/styles.css",// acceso a styles
                         "/js/**",
-                        "/webjars/**")
+                        "/webjars/**",
+                        "/registro/reestablecerAcceso/**")
                         .permitAll()
                 .requestMatchers(
                         "/producto/nuevo","/producto/guardar",
