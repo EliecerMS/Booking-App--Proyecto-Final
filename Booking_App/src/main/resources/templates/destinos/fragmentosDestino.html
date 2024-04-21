@@ -24,9 +24,9 @@
                                     <i class="fa-solid fa-bed"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="¿Adonde quieres ir?" th:value="${locacion}" th:name="locacion" required="true"/>
-                                    <button class="btn btn-orange" type="submit">
-                                        <i class="fa-solid fa-magnifying-glass"></i> Buscar
-                                    </button>
+                                <button class="btn btn-orange" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -34,25 +34,27 @@
                     <div class="col-3">
                         <form method="POST" th:action="@{/destinos/filtroTotal}">
                             <div class="card p-3">
-                                <h5 class="text-center pt-3">Fechas</h5>
+                                <div>
+                                    <h5 class="text-center pt-3">Fechas</h5>
+                                </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col text-center">
                                         <label for="startDate">Desde:</label>
-                                        <input class="inputDate" type="date" id="startDate" name="startDate" >
+                                        <input class="inputDate" type="date" id="startDate" name="fechaInicio" required="true">
                                     </div>
                                     <div class="col text-center">
                                         <label for="endDate">Hasta:</label>
-                                        <input class="inputDate" type="date" id="endDate" name="endDate" >
+                                        <input class="inputDate" type="date" id="endDate" name="fechaFinal" required="true">
                                     </div>
                                 </div>
                                 <hr>
-                                <div>
-                                    <h5 class="text-center pt-3">Personas</h5>
-                                </div>
+                                    <div>
+                                        <h5 class="text-center pt-3">Personas</h5>
+                                    </div>
 
                                     <div class="mb-3 text-center">
                                         <div class="container">
-                                            
+
                                                 <div class="counter">
                                                     <span>
                                                         <a href="javascript:void(0);" id="decrement-btn">-</a>

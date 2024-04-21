@@ -13,7 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Date;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -45,15 +47,26 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name="id_usuario")
     Usuario usuario;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="fechaInicio")
+    private Date fechaInicio;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="fechaFinal")
+    private Date fechaFinal;
+
 
     public Reserva() {
     }
 
-    public Reserva(int cantidad_adultos, int cantidad_ninnos, int noches, BigDecimal precio_total) {
+    public Reserva(int cantidad_adultos, int cantidad_ninnos, int noches, BigDecimal precio_total, Date fechaInicio, Date fechaFinal) {
         this.cantidad_adultos = cantidad_adultos;
         this.cantidad_ninnos = cantidad_ninnos;
         this.noches = noches;
         this.precio_total = precio_total;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
     }
     
     

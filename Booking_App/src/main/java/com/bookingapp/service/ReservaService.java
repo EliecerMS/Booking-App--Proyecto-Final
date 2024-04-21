@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.bookingapp.service;
 
 import com.bookingapp.domain.Reserva;
+import com.bookingapp.domain.Usuario;
+import java.util.List;
 
-/**
- *
- * @author eliec
- */
 public interface ReservaService {
     
-    // Se inserta una nueva reserva si el id de la reserva esta vacío
+    void save(Reserva reserva);
     
-    public void save(Reserva reserva);
+    List<Reserva> obtenerReservasPorUsuario(Usuario usuario);
     
+    Reserva obtenerReservaPorId(long id);
+    
+    void eliminarReservaPorId(long id);
 }

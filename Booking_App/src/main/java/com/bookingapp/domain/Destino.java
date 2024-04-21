@@ -50,7 +50,7 @@ public class Destino implements Serializable{
     private int cantidad_huespedes;
     private int camas;
     private int bannos;
-    private int rating;
+    private Integer rating;
     private LocalDate start_date;
     private LocalDate end_date;
     

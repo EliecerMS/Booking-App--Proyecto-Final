@@ -1,30 +1,65 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
 
+<header th:replace="~{layout/plantilla :: header}"></header>
 
-    <head th:replace="~{layout/plantilla :: head}"></head>
-    <body>
+<div style="background-color:#e4e9e9;" class="py-5">
+    <div class="container">
+        <div>
+            <div class="mb-3" style="display: inline-block; background-color: white; border-radius: 5px;">
+                <a href="perfil">
+                    <h6 style="display: inline-block; margin: 0; color: grey">Mi Perfil /</h6>
+                </a>
+                <h6 style="display: inline-block; margin: 0; color: #e07c1e">Reservaciones</h6>
+            </div>
+            <h3>Mis Reservaciones</h3>
+            <h6>Aquí podrás ver tus reservaciones actuales y pasadas.</h6>
+            <div class="panel" style="max-width: 1360px;">
 
-        <header th:replace="~{layout/plantilla :: header}"></header>
-        <div style="background-color:#e4e9e9;" class="py-5">
-            <div class="container">
-                <div>
-                    <div class="mb-3" style="display: inline-block; background-color: white; border-radius: 5px;">
-                        <a href="perfil"><h6 style="display: inline-block; margin: 0; color: grey">Mi Perfil /</h6></a>
-                        <h6 style="display: inline-block; margin: 0; color: #e07c1e">Reservaciones</h6>
-                    </div>
-                    <h3>
-                        Mis Reservaciones
-                    </h3>
-                    <h6>
-                        Aquí podrás ver tus reservaciones actuales y pasadas.
-                    </h6>
-                </div>
-                <div class="panel" style="max-width: 1360px; max-height: 3000px;">
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="padding-right: 110px;">ID</th>
+                            <th style="padding-right: 110px;">Nombre</th>
+                            <th style="padding-right: 110px; text-align: center;">Cantidad de Adultos</th>
+                            <th style="padding-right: 110px; text-align: center;">Cantidad de niños</th>
+                            <th style="padding-right: 110px;">Precio Total</th>
+                            <th style="padding-right: 110px;">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reserva : ${reservas}">
+                            <td th:text="${reserva.idReserva}"></td>
+                            <td>
+                                <img th:src="@{${reserva.destino.ruta_imagen}}" alt="Imagen de destino" style="width: 80px; height: auto;" />
+                                <span th:text="${reserva.destino.nombre_destino}"></span>
+                            </td>
+                            <td th:text="${reserva.cantidad_adultos}" style="text-align: center"></td>
+                            <td th:text="${reserva.cantidad_ninnos}" style="text-align: center"></td>
+                            <td th:text="${reserva.precio_total}"></td>
+                            <td>
+                                <form method="POST" th:action="@{/reservaciones/modifica}">
+                                    <input type="hidden" name="reservaId" th:value="${reserva.idReserva}"/>
+                                    <input type="number" name="cantidadAdultos" th:value="${reserva.cantidad_adultos}" required/>
+                                    <input type="number" name="cantidadNinos" th:value="${reserva.cantidad_ninnos}" required/>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                                <form method="POST" th:action="@{/reservaciones/eliminar}">
+                                    <input type="hidden" name="reservaId" th:value="${reserva.idReserva}"/>
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <footer th:replace="~{layout/plantilla :: footer}"></footer>
-    </body>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"></footer>
+
+</body>
 </html>
