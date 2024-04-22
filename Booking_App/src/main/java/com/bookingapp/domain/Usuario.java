@@ -39,6 +39,9 @@ public class Usuario implements Serializable {
     private String rutaImagen;
     private boolean activo;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Tarjeta> tarjetas;
+    
     @OneToMany
     @JoinColumn(name = "id_usuario", updatable = false)
     List<Reserva> reservas;

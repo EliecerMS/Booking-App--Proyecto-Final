@@ -19,11 +19,13 @@ import org.springframework.ui.Model;
 @RequestMapping("/facturacion")
 public class FacturacionController {
 
-@GetMapping("")
-    public String inicio (Model model) {
+    @GetMapping("")
+    public String inicio(Model model) {
         model.addAttribute("title", "Facturacion");
-        return "/facturacion/facturacion";
+        return "facturacion/facturacion";
     }
-
 }
+
+
+
 
