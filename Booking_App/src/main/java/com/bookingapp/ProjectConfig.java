@@ -66,7 +66,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/registro").setViewName("/registro");
  }
 
-   /*@Bean
+   @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
@@ -116,5 +116,5 @@ public class ProjectConfig implements WebMvcConfigurer {
         build
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
-    }*/
+    }
     }

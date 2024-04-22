@@ -40,5 +40,5 @@ public class Tarjeta {
         this.usuario = usuario;
     }
 
-    // Getters y setters
+    
 }
