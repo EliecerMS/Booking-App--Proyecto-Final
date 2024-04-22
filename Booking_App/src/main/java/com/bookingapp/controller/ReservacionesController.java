@@ -41,6 +41,13 @@ public class ReservacionesController {
         return "/reservaciones/reservaciones";
     }
 
+    @GetMapping("/editar")
+    public String mostrarPaginaEdicion(@RequestParam("id") Long idReserva, Model model) {
+    Reserva reserva = reservaService.obtenerReservaPorId(idReserva);
+    model.addAttribute("reserva", reserva);
+    return "reservaciones/editar";
+}
+
     @PostMapping("/guardar")
     public String reservaGuardar(Reserva reserva) {
         reservaService.save(reserva);
@@ -48,9 +55,9 @@ public class ReservacionesController {
     }
 
     @PostMapping("/modifica")
-    public String editarReserva(@RequestParam("reservaId") long reservaId,
-                                @RequestParam("cantidadAdultos") int cantidadAdultos,
-                                @RequestParam("cantidadNinos") int cantidadNinos) {
+    public String editarReserva(@RequestParam("idReserva") long reservaId,
+            @RequestParam("cantidad_adultos") int cantidadAdultos,
+            @RequestParam("cantidad_ninnos") int cantidadNinos) {
         Reserva reserva = reservaService.obtenerReservaPorId(reservaId);
         reserva.setCantidad_adultos(cantidadAdultos);
         reserva.setCantidad_ninnos(cantidadNinos);

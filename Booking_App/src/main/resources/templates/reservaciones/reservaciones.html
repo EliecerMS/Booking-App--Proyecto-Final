@@ -19,38 +19,40 @@
             <div class="panel" style="max-width: 1360px;">
 
                 <table>
-                    <thead>
-                        <tr>
-                            <th style="padding-right: 110px;">ID</th>
-                            <th style="padding-right: 110px;">Nombre</th>
-                            <th style="padding-right: 110px; text-align: center;">Cantidad de Adultos</th>
-                            <th style="padding-right: 110px; text-align: center;">Cantidad de niños</th>
-                            <th style="padding-right: 110px;">Precio Total</th>
-                            <th style="padding-right: 110px;">Acción</th>
-                        </tr>
+
+                    <thead class="panel" style="max-width: 1360px;max-height: 80px; background-color: #D5DBDB">
+                            <tr>
+
+                                <th style="padding-right: 110px;">ID</th>
+                                <th style="padding-right: 110px;">Nombre</th>
+                                <th style="padding-right: 110px; text-align: center;">Cantidad de Adultos</th>
+                                <th style="padding-right: 110px; text-align: center;">Cantidad de niños</th>
+                                <th style="padding-right: 110px;">Precio Total</th>
+                                <th style="padding-right: 110px;">Acción</th>
+
+                            </tr>
                     </thead>
                     <tbody>
+
                         <tr th:each="reserva : ${reservas}">
-                            <td th:text="${reserva.idReserva}"></td>
+                        <td th:text="${reserva.idReserva}"></td>
                             <td>
                                 <img th:src="@{${reserva.destino.ruta_imagen}}" alt="Imagen de destino" style="width: 80px; height: auto;" />
                                 <span th:text="${reserva.destino.nombre_destino}"></span>
                             </td>
-                            <td th:text="${reserva.cantidad_adultos}" style="text-align: center"></td>
-                            <td th:text="${reserva.cantidad_ninnos}" style="text-align: center"></td>
+                            <td th:text="${reserva.cantidad_adultos}" style="padding-left: 50px;"></td>
+                            <td th:text="${reserva.cantidad_ninnos}" style="padding-left: 50px;"></td>
                             <td th:text="${reserva.precio_total}"></td>
                             <td>
-                                <form method="POST" th:action="@{/reservaciones/modifica}">
-                                    <input type="hidden" name="reservaId" th:value="${reserva.idReserva}"/>
-                                    <input type="number" name="cantidadAdultos" th:value="${reserva.cantidad_adultos}" required/>
-                                    <input type="number" name="cantidadNinos" th:value="${reserva.cantidad_ninnos}" required/>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </form>
-                                <form method="POST" th:action="@{/reservaciones/eliminar}">
-                                    <input type="hidden" name="reservaId" th:value="${reserva.idReserva}"/>
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
+                                <div class="btn-group">
+                                    <a th:href="@{/reservaciones/editar(id=${reserva.idReserva})}" class="btn btn-warning btn-sm" style="border-radius: 30px; background-color: #e07c1e; color: white">Editar</a>
+                                    <form method="POST" th:action="@{/reservaciones/eliminar}" class="d-inline">
+                                        <input type="hidden" name="reservaId" th:value="${reserva.idReserva}"/>
+                                        <button type="submit" class="btn btn-danger btn-sm" style="margin-left: 30px;">Eliminar</button>
+                                    </form>
+                                </div>
                             </td>
+
                         </tr>
                     </tbody>
                 </table>
