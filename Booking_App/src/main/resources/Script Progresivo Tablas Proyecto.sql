@@ -80,6 +80,8 @@ id_usuario int NOT NULL,
 cantidad_adultos int NOT NULL,
 cantidad_ninnos int NULL,
 noches int NOT NULL,
+fecha_Inicio DATE DEFAULT NULL,
+fecha_Final DATE DEFAULT NULL,
 precio_total DECIMAL(10,2) NOT NULL,
 CONSTRAINT fk_destino FOREIGN KEY (id_destino)  
 REFERENCES destino(id_destino)  
@@ -130,3 +132,13 @@ INSERT INTO bookingBD.rol (id_rol, nombre, id_usuario) VALUES (4,'ROLE_VENDEDOR'
 INSERT INTO bookingBD.rol (id_rol, nombre, id_usuario) VALUES (5,'ROLE_USER',2);
 
 -- DROP DATABASE bookingBD;
+
+CREATE TABLE tarjeta (
+  id_tarjeta int auto_increment primary key,
+  nombre varchar(200) DEFAULT NULL,
+  numero varchar(20) DEFAULT NULL,
+  fecha_vencimiento date DEFAULT NULL,
+  cvc int DEFAULT NULL,
+  id_Usuario int DEFAULT NULL,
+  CONSTRAINT tarjeta_ibfk_1 FOREIGN KEY (`id_Usuario`) REFERENCES usuario (`id_usuario`)
+);

@@ -67,8 +67,8 @@ public class DestinoController {
     }
     
      @PostMapping("/filtroTotal")
-    public String filtroTotal(@RequestParam(value = "precioSup", required = false) Double precioSup, @RequestParam(value = "startDate") String startDate, 
-            @RequestParam(value = "endDate") String endDate,
+    public String filtroTotal(@RequestParam(value = "precioSup", required = false) Double precioSup, @RequestParam(value = "fechaInicio") String startDate, 
+            @RequestParam(value = "fechaFinal") String endDate,
             @RequestParam(value = "maximoHuespedes") Integer maximoHuespedes,
             @RequestParam(value = "rating", required = false) Integer rating,Model model) 
     {

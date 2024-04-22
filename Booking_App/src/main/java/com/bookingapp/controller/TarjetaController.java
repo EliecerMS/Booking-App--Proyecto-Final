@@ -34,7 +34,7 @@ public class TarjetaController {
 
     @PostMapping("/crear")
     public String crearTarjeta(@RequestParam("NombreTarjeta") String nombreTarjeta,
-                               @RequestParam("NumeroTarjeta") int numeroTarjeta,
+                               @RequestParam("NumeroTarjeta") String numeroTarjeta,
                                @RequestParam("FechaVencimiento") LocalDate fechaVencimiento,
                                @RequestParam("CVC") int cvc,
                                Authentication authentication) {
