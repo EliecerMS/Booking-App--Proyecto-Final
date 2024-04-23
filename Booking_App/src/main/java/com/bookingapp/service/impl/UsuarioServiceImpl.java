@@ -85,4 +85,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     public Usuario existeUsuarioPorEmailYTelefono(String email, String telefono){
         return usuarioDao.findByEmailAndTelefono(email,telefono);
     }
+
+    @Override
+    public void saveUpdate(long idUsuario, String nombre, String primer_apellido, String segundo_apellido, String telefono, String email, String username, String imagenFile) {
+        usuarioDao.saveUpdate( idUsuario, nombre, primer_apellido, segundo_apellido, telefono, email, username, imagenFile );
+    }
 }
